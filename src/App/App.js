@@ -1,16 +1,13 @@
 // AppRouter.js
 import React, { lazy, Suspense } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 const DashboardPage = lazy(() =>
   import('../Dashboard/DashboardPage/DashboardPage')
 );
-const HomePage = lazy(() => import('../Dashboard/HomeTab/HomeTab'));
+const HomePage = lazy(() =>
+  import('../components/DesignContainer/DesignContainer')
+);
 const RegistrationPage = lazy(() =>
   import('../Auth/RegistrationPage/RegistrationPage')
 );
@@ -21,12 +18,16 @@ function AppRouter() {
     <Suspense fallback={<div>Loading...</div>}>
       <Router>
         <Routes>
-     
-         
           <Route path="/Money-Guard-App" element={<HomePage />} />
-          <Route path="/Money-Guard-App/register" element={<RegistrationPage />} />
+          <Route
+            path="/Money-Guard-App/register"
+            element={<RegistrationPage />}
+          />
           <Route path="/Money-Guard-App/login" element={<LoginPage />} />
-          <Route path="/Money-Guard-App/dashboard" element={<DashboardPage />} />
+          <Route
+            path="/Money-Guard-App/dashboard"
+            element={<DashboardPage />}
+          />
           {/* Alte rute */}
         </Routes>
       </Router>
