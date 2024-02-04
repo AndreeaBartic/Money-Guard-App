@@ -23,10 +23,10 @@ function AppRouter() {
         <Routes>
           <Route path="/Money-Guard-App" element={<Navigate to="/home" />} />
          
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/register" element={<RegistrationPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/Money-Guard-App/home" element={<HomePage />} />
+          <Route path="/Money-Guard-App/register" element={<RegistrationPage />} />
+          <Route path="/Money-Guard-App/login" element={<LoginPage />} />
+          <Route path="/Money-Guard-App/dashboard" element={<DashboardPage />} />
           {/* Alte rute */}
         </Routes>
       </Router>
