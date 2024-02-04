@@ -1,0 +1,23 @@
+.container {
+  min-width: 280px;
+  margin: 0 auto;
+  padding: 32px 0; /* default padding */
+  position: relative;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    padding-top: 20px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .container {
+    width: 800px;
+    padding: 46px 0 0 70px; /* default padding for 'main' */
+  }
+
+  .container.statistics {
+    padding: 32px 0 0 54px; /* padding for 'statistics' */
+  }
+}
