@@ -63,7 +63,7 @@ const LoginPage = () => {
       </Formik>
 
       <div className="register-link">
-        Don't have an account? <Link to="/register">Register</Link>
+        Don't have an account? <Link to="/Money-Guard-App/register">Register</Link>
       </div>
     </div>
   );
