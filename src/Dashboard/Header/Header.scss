@@ -1,0 +1,49 @@
+// Header.scss
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+  flex: 1;
+}
+
+.logo-link {
+  display: block;
+}
+
+.logo-image {
+  max-width: 100px;
+  height: auto;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  margin-right: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333333;
+}
+
+.logout-button {
+  padding: 10px 15px;
+  background-color: #dc3545;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #c82333;
+  }
+}
