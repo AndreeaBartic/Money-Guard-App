@@ -21,9 +21,9 @@ function AppRouter() {
     <Suspense fallback={<div>Loading...</div>}>
       <Router>
         <Routes>
-          <Route path="/Money-Guard-App" element={<Navigate to="/home" />} />
+     
          
-          <Route path="/Money-Guard-App/home" element={<HomePage />} />
+          <Route path="/Money-Guard-App" element={<HomePage />} />
           <Route path="/Money-Guard-App/register" element={<RegistrationPage />} />
           <Route path="/Money-Guard-App/login" element={<LoginPage />} />
           <Route path="/Money-Guard-App/dashboard" element={<DashboardPage />} />
