@@ -6,7 +6,10 @@ const ButtonAddTransactions = () => {
 
   return (
     <div>
-      <button onClick={() => setIsOpen(true)}>Add</button>
+      <button className="add-btn" onClick={() => setIsOpen(true)}>
+        <span className="plus"></span>
+        <span className="minus"></span>
+      </button>
       <ModalAddTransactions isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </div>
   );

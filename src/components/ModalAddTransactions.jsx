@@ -9,9 +9,9 @@ const ModalAddTransactions = ({ isOpen, onClose, children }) => {
     <div className="modal-backdrop">
       <div className="modal-content">
         {children}
-
-        <button onClick={onClose}>Close</button>
-
+        <button className="close-btn" onClick={onClose}>
+          X
+        </button>
         <FormAddTransaction />
       </div>
     </div>,

@@ -12,6 +12,7 @@ import {
   StyledComment,
   Label,
   ErrorMessageStyled,
+  CancelBtn,
 } from './Form.styled';
 // import { useDispatch } from 'react-redux';
 // import { toggleModal } from 'redux/modal/ModalSlice';
@@ -100,7 +101,11 @@ function FormAddTransaction() {
     // resetForm();
     // dispatch(toggleModal());
   };
-
+  const closeClick = e => {
+    if (e.target.name === 'cancel') {
+      console.log('clicked');
+    }
+  };
   return (
     <>
       <AddTitle>Add transaction</AddTitle>
@@ -163,6 +168,9 @@ function FormAddTransaction() {
               <ErrorMessageStyled name="comment" component="div" />
             </StyledLabel>
             <AddBtn type="submit">Add</AddBtn>
+            <CancelBtn name="cancel" type="button" onClick={closeClick}>
+              Cancel
+            </CancelBtn>
           </StyledForm>
         )}
       </Formik>

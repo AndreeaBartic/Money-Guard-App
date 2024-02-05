@@ -9,7 +9,7 @@ export const AddTitle = styled.h2`
   font-weight: 400;
   font-size: 24px;
   line-height: 1.5;
-  color: var(--white);
+  color: #fbfbfb;
 
   @media screen and (min-width: 768px) {
     margin-bottom: 41px;
@@ -40,7 +40,25 @@ export const AddBtn = styled.button`
   letter-spacing: 1.8px;
   cursor: pointer;
 `;
-
+export const CancelBtn = styled.button`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 50px;
+  padding: 13px 68px;
+  background-color: rgba(251, 251, 251, 1);
+  border-radius: 20px;
+  border: none;
+  line-height: 1.5;
+  font-size: 18px;
+  letter-spacing: 1.8px;
+  color: rgba(98, 63, 139, 1);
+  font-weight: 400;
+  text-transform: uppercase;
+  cursor: pointer;
+`;
 export const StyledLabel = styled.label`
   margin-bottom: 40px;
   width: 100%;
@@ -89,7 +107,7 @@ export const StyledForm = styled(Form)`
     right: 12px;
     width: 24px;
     height: 24px;
-    fill: var(--purple);
+    fill: #734aef;
 
     @media screen and (max-width: 767px) {
       flex-direction: column;
