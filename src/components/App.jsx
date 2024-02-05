@@ -1,8 +1,5 @@
-import React, { useEffect } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
 import { DesignContainer } from './DesignContainer/DesignContainer';
-
-const Home = React.lazy(() => import('./pages/Home'));
+import Home from './pages/Home';
 
 export const App = () => {
   return (

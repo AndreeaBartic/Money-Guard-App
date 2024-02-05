@@ -1,10 +1,4 @@
-import {
-  SidebarStyled,
-  MainContainer,
-  DownContainer,
-  Graphics,
-  Line,
-} from './Sidebar.styled';
+import { SidebarStyled, Graphics, Line } from './Sidebar.styled';
 
 import { NavigationBar } from '../NavigationBar/NavigationBar';
 import { Balance } from '../Balance/Balance';

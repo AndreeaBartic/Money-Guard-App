@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { BalanceStyled, Text, Line, Symbol, Total } from './Balance.styled';
 
 export const Balance = () => {
