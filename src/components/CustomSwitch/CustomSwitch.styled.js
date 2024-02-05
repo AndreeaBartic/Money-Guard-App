@@ -14,7 +14,7 @@ export const Text = styled.span`
   right: 100px;
   font-weight: 600;
   color: ${({ checked }) =>
-    checked ? 'rgba(255, 255, 255, 0.60)' : 'var(--yellow)'};
+    checked ? 'rgba(255, 255, 255, 0.60)' : '#ffb627'};
 `;
 
 export const TextExpense = styled(Text)`
@@ -30,7 +30,7 @@ export const Slider = styled.div`
     `translateY(-50%) translateX(${checked ? '40px' : '0'})`};
   width: 44px;
   height: 44px;
-  background-color: ${({ checked }) => (checked ? '#FF868D' : 'yellow')};
+  background-color: ${({ checked }) => (checked ? '#FF868D' : '#ffb627')};
   box-shadow: ${({ checked }) =>
     checked
       ? '0px 6px 15px 0px rgba(255, 134, 141, 0.50)'
@@ -45,7 +45,7 @@ export const Plus = styled.div`
   position: absolute;
   width: 20px;
   height: 2px;
-  background-color: var(--white);
+  background-color: #fff;
   top: 50%;
   left: 50%;
   transform: ${({ checked }) =>
@@ -58,7 +58,7 @@ export const Minus = styled.div`
   position: absolute;
   width: 20px;
   height: 2px;
-  background-color: var(--white);
+  background-color: #fff;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(0deg);
