@@ -1,41 +1,79 @@
-// AppRouter.js
 
 import React, { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
+import React, { Suspense, lazy, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// import { useMediaQuery } from 'react-responsive';
+import { useAuth } from '../components/hooks';
+// import { SpinnerLoader } from '../components/Spinner/Spinner';
+import { refreshUser } from '../Redux/authReducers/operations';
+import ProtectedRoute from '../components/Router/ProtectedRoute';
+// import PublicRoute from '../components/Router/PublicRoute';
+import GlobalStyles from '../styles/GlobalStyles';
+
 
 const Home = lazy(() => import('../components/pages/Home'));
-const RegistrationPage = lazy(() =>
-  import('../Auth/RegistrationPage/RegistrationPage')
+const Login = lazy(() => import('../Auth/LoginPage/LoginForm'));
+const Register = lazy(() =>
+  import('../Auth/RegistrationPage/RegistrationForm')
 );
-const LoginPage = lazy(() => import('../Auth/LoginPage/LoginPage'));
+
 const CurrencyPage = lazy(() =>
   import('../components/pages/CurrencyMob/CurrencyMobile')
 );
 
-function AppRouter() {
-  const isMobile = useMediaQuery({ minWidth: 240, maxWidth: 767 });
+export const App = () => {
+  const dispatch = useDispatch();
+  const { isLoggedIn, token } = useAuth();
+  // const isMobile = useMediaQuery({ minWidth: 240, maxWidth: 767 });
+
+  useEffect(() => {
+    if (!isLoggedIn && token) dispatch(refreshUser());
+  }, [dispatch, isLoggedIn, token]);
+    const isMobile = useMediaQuery({ minWidth: 240, maxWidth: 767 });
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Routes>
-        <Route path="/Money-Guard-App" element={<Home />} />
-        <Route
-          path="/Money-Guard-App/register"
-          element={<RegistrationPage />}
-        />
-        <Route path="/Money-Guard-App/login" element={<LoginPage />} />
-        <Route
-          path="/Money-Guard-App/currency"
+    <>
+      <Suspense>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute redirectTo="/login" component={<Login />} />
+            }
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+
+          {isLoggedIn ? (
+            <Route path="/home" element={<Home />} />
+          ) : (
+            <Route path="/login" element={<Login />} />
+          )}
+           <Route
+          path="/currency"
           element={
-            isMobile ? <CurrencyPage /> : <Navigate to={'/Money-Guard-App'} />
+            isMobile ? <CurrencyPage /> : <Navigate to={'/'} />
           }
         />
+          {/* <Route
+              path="/Money-Guard-App/statistics"
+              element={
+                <PublicRoute>
+                  <StatiscticsPage />
+                </PublicRoute>
+              }
+            /> */}
 
-        {/* Alte rute */}
-      </Routes>
-    </Suspense>
+        </Routes>
+      </Suspense>
+      <ToastContainer />
+      <GlobalStyles />
+    </>
   );
-}
-
-export default AppRouter;
+};

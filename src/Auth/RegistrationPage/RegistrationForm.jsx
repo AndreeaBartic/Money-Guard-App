@@ -1,101 +1,149 @@
-// RegistrationForm.js
-import React from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { useDispatch } from 'react-redux';
+import { register } from '../../Redux/authReducers/operations';
+import { CustomButton } from '../../components/common/CustomButton';
+import { ErrorMessage, Formik } from 'formik';
 import * as Yup from 'yup';
-import PasswordStrengthBar from 'react-password-strength-bar';
-import { useNavigate } from 'react-router-dom';
-import './RegistrationForm.scss';
+import Logotip from '../../images/svg/logo.svg';
+import {
+  EmailIcon,
+  ErrorContainer,
+  ErrorMessageStyled,
+  FormStyled,
+  IconContainer,
+  InputStyled,
+  LabelStyled,
+  PasswordIcon,
+} from '../../Auth/LoginPage/LoginForm.styled';
+import { LogotipStyled } from './RegistrationForm.styled';
+import { ProgressBar } from './ProgressBar.styled';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
-const RegistrationForm = ({ onSubmit }) => {
-  const navigate = useNavigate();
+const ValidationSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email address').required('Required'),
+  password: Yup.string()
+    .min(6, 'Must be at least 6 characters')
+    .max(12, 'Must be 12 characters or less')
+    .required('Required'),
+  passwordConfirm: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Password mismatch')
+    .required('Required'),
+});
 
-  const initialValues = {
-    email: '',
-    password: '',
-    confirmPassword: '',
+const RegisterForm = () => {
+  const dispatch = useDispatch();
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      const name = values.email.split('@')[0];
+      const formData = {
+        email: values.email.trim(),
+        password: values.password.trim(),
+        name,
+      };
+
+      await dispatch(register(formData));
+
+      resetForm();
+    } catch (error) {
+      toast.error('A apărut o eroare. Vă rugăm să încercați din nou.', {
+        position: 'top-right',
+        autoClose: 3000,
+      });
+    }
   };
-
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Required'),
-    password: Yup.string()
-      .required('Required')
-      .min(6, 'Password must be at least 6 characters'),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
-      .required('Required'),
-  });
-
-  const handleSuccessfulAuth = () => {
-    navigate('/login');
-  };
-
   return (
     <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={(values, actions) => {
-        onSubmit(values, actions);
-        handleSuccessfulAuth();
+      initialValues={{
+        email: '',
+        password: '',
+        passwordConfirm: '',
       }}
+      validationSchema={ValidationSchema}
+      onSubmit={handleSubmit}
+      autoComplete="off"
     >
-      {({ values }) => (
-        <Form className="registration-form">
-          <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <Field
-              type="email"
-              id="email"
-              name="email"
-              className="input-field"
-              autoComplete="email"
+      {({ values, handleChange }) => (
+        <FormStyled>
+          <LogotipStyled>
+            <img
+              src={Logotip}
+              alt="Logo MoneyGuard"
+              width="36px"
+              height="36px"
+              draggable="false"
             />
-            <ErrorMessage
-              name="email"
-              component="div"
-              className="error-message"
-            />
-          </div>
+            <h3>MoneyGuard</h3>
+          </LogotipStyled>
 
-          <div className="form-group">
-            <label htmlFor="password">Password:</label>
-            <Field
-              type="password"
-              id="password"
-              name="password"
-              className="input-field"
-              autoComplete="new-password"
-            />
-            <ErrorMessage
-              name="password"
-              component="div"
-              className="error-message"
-            />
-            <PasswordStrengthBar password={values.password} />
-          </div>
+          <LabelStyled>
+            <ErrorContainer>
+              <IconContainer>
+                <EmailIcon />
+              </IconContainer>
+              <InputStyled
+                name="email"
+                type="email"
+                placeholder="E-mail"
+                autoComplete="off"
+              />
+              <ErrorMessageStyled>
+                <ErrorMessage component="span" name="email" />
+              </ErrorMessageStyled>
+            </ErrorContainer>
+          </LabelStyled>
 
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm Password:</label>
-            <Field
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              className="input-field"
-              autoComplete="new-password"
-            />
-            <ErrorMessage
-              name="confirmPassword"
-              component="div"
-              className="error-message"
-            />
-          </div>
+          <LabelStyled>
+            <ErrorContainer>
+              <IconContainer>
+                <PasswordIcon />
+              </IconContainer>
+              <InputStyled
+                name="password"
+                type="password"
+                placeholder="Password"
+                autoComplete="off"
+                value={values.password}
+                onChange={e => {
+                  handleChange(e);
+                  setPassword(e.target.value);
+                }}
+              />
+              <ErrorMessageStyled>
+                <ErrorMessage component="span" name="password" />
+              </ErrorMessageStyled>
+            </ErrorContainer>
+          </LabelStyled>
 
-          <button type="submit" className="submit-button">
-            Register
-          </button>
-        </Form>
+          <LabelStyled>
+            <ErrorContainer>
+              <IconContainer>
+                <PasswordIcon />
+              </IconContainer>
+              <div>
+                <InputStyled
+                  name="passwordConfirm"
+                  type="password"
+                  placeholder="Confirm password"
+                  autoComplete="off"
+                />
+                <ProgressBar password={password} />
+              </div>
+              <ErrorMessageStyled>
+                <ErrorMessage component="span" name="passwordConfirm" />
+              </ErrorMessageStyled>
+            </ErrorContainer>
+          </LabelStyled>
+
+          <CustomButton type="submit">Register</CustomButton>
+          <CustomButton isNavLink to="/login">
+            Log In
+          </CustomButton>
+        </FormStyled>
       )}
     </Formik>
   );
 };
 
-export default RegistrationForm;
+export default RegisterForm;
