@@ -137,7 +137,7 @@ const RegisterForm = () => {
           </LabelStyled>
 
           <CustomButton type="submit">Register</CustomButton>
-          <CustomButton isNavLink to="/login">
+          <CustomButton isNavLink to="/Money-Guard-App/login">
             Log In
           </CustomButton>
         </FormStyled>

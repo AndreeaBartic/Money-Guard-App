@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {
   persistStore,
+  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -8,31 +9,35 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import { modalReducer } from './modal/modalSlice';
+import storage from 'redux-persist/lib/storage';
+
+// import { modalReducer } from './modal/modalSlice';
 
 import { PersistedCurrencyReducer } from './currencyReducer/currencySlice';
 import { authReducer } from './authReducers/slice'; // Updated import
 import balanceReducer from './balance/balanceSlice';
 import { PersistedTransactionReducer } from './transactions/transactionsSlice';
 
-// Configure and create the Redux store
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token'],
+};
+
 export const store = configureStore({
   reducer: {
+    transactions: PersistedTransactionReducer,
     currency: PersistedCurrencyReducer,
-    transactions: PersistedTransactionReducer,
-    auth: authReducer, // Updated reducer
-    modal: modalReducer,
     balance: balanceReducer,
-    transactions: PersistedTransactionReducer,
+    auth: persistReducer(authPersistConfig, authReducer),
+    // transactions: financeReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
-      // Ignore certain actions for redux-persist compatibility
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
 });
 
-// Create and export a persistor to enable state persistence
-export const persistor = persistStore(store);
+export const persistStor = persistStore(store);

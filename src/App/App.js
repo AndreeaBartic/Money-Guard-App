@@ -1,7 +1,8 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import React, { lazy, Suspense, useEffect } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import React, { Suspense, lazy, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import { useMediaQuery } from 'react-responsive';
@@ -9,45 +10,70 @@ import { useAuth } from '../components/hooks';
 // import { SpinnerLoader } from '../components/Spinner/Spinner';
 import { refreshUser } from '../Redux/authReducers/operations';
 import ProtectedRoute from '../components/Router/ProtectedRoute';
-// import PublicRoute from '../components/Router/PublicRoute';
-import GlobalStyles from '../styles/GlobalStyles';
-
+import PublicRoute from '../components/Router/PublicRoute';
+// import { useAuth } from '../components/hooks';
 import StatisticsTab from '../components/pages/StatisticsTab/StatisticsTab';
 
-
 const Home = lazy(() => import('../components/pages/Home'));
-const Login = lazy(() => import('../Auth/LoginPage/LoginForm'));
-const Register = lazy(() =>
-  import('../Auth/RegistrationPage/RegistrationForm')
+const RegistrationPage = lazy(() =>
+  import('../components/pages/RegistrationPage')
 );
-
+const LoginPage = lazy(() => import('../components/pages/LoginPage'));
 const CurrencyPage = lazy(() =>
   import('../components/pages/CurrencyMob/CurrencyMobile')
 );
 
-export const App = () => {
+function AppRouter() {
+  const isMobile = useMediaQuery({ minWidth: 240, maxWidth: 767 });
   const dispatch = useDispatch();
-  const { isLoggedIn, token } = useAuth();
-  // const isMobile = useMediaQuery({ minWidth: 240, maxWidth: 767 });
 
   useEffect(() => {
-    if (!isLoggedIn && token) dispatch(refreshUser());
-  }, [dispatch, isLoggedIn, token]);
-    const isMobile = useMediaQuery({ minWidth: 240, maxWidth: 767 });
-
+    dispatch(refreshUser());
+  }, [dispatch]);
   return (
-    <>
-      <Suspense>
+    <BrowserRouter>
+      <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route
-            path="/"
+            path="/Money-Guard-App/login"
             element={
-              <ProtectedRoute redirectTo="/login" component={<Login />} />
+              <PublicRoute redirectTo="/Money-Guard-App/home">
+                <LoginPage />
+              </PublicRoute>
             }
           />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route
+            path="/Money-Guard-App/register"
+            element={
+              <PublicRoute redirectTo="/Money-Guard-App/home">
+                <RegistrationPage />
+              </PublicRoute>
+            }
+          />
 
+          <Route
+            path="/Money-Guard-App/home"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+
+
+          {/* Public or Protected Route based on Mobile */}
+          <Route
+            path="currency"
+            element={
+              isMobile ? (
+                <PublicRoute redirectTo="/Money-Guard-App/home">
+                  <CurrencyPage />
+                </PublicRoute>
+              ) : (
+                <Navigate to={'/Money-Guard-App'} />
+              )
+            }
+          />
 
           {isLoggedIn ? (
             <Route path="/home" element={<Home />} />
@@ -67,10 +93,13 @@ export const App = () => {
               }
             /> }
 
+
+          {/* Redirect to Home for any unknown routes */}
+          <Route path="*" element={<Navigate to="/Money-Guard-App/home" />} />
         </Routes>
       </Suspense>
-      <ToastContainer />
-      <GlobalStyles />
-    </>
+    </BrowserRouter>
   );
-};
+}
+
+export default AppRouter;
