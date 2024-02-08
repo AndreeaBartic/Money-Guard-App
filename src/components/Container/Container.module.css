@@ -10,14 +10,3 @@
     padding-top: 20px;
   }
 }
-
-@media screen and (min-width: 1280px) {
-  .container {
-    width: 800px;
-    padding: 46px 0 0 70px; /* default padding for 'main' */
-  }
-
-  .container.statistics {
-    padding: 32px 0 0 54px; /* padding for 'statistics' */
-  }
-}

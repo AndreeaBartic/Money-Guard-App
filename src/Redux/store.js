@@ -9,6 +9,8 @@ import {
   REGISTER,
 } from 'redux-persist';
 import { modalReducer } from './modal/modalSlice';
+
+import { PersistedCurrencyReducer } from './currencyReducer/currencySlice';
 import { authReducer } from './authReducers/slice'; // Updated import
 import balanceReducer from './balance/balanceSlice';
 import { PersistedTransactionReducer } from './transactions/transactionsSlice';
@@ -16,6 +18,8 @@ import { PersistedTransactionReducer } from './transactions/transactionsSlice';
 // Configure and create the Redux store
 export const store = configureStore({
   reducer: {
+    currency: PersistedCurrencyReducer,
+    transactions: PersistedTransactionReducer,
     auth: authReducer, // Updated reducer
     modal: modalReducer,
     balance: balanceReducer,

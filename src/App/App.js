@@ -1,3 +1,7 @@
+
+import React, { lazy, Suspense } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 import React, { Suspense, lazy, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
@@ -5,25 +9,22 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import { useMediaQuery } from 'react-responsive';
 import { useAuth } from '../components/hooks';
-
 // import { SpinnerLoader } from '../components/Spinner/Spinner';
 import { refreshUser } from '../Redux/authReducers/operations';
 import ProtectedRoute from '../components/Router/ProtectedRoute';
 // import PublicRoute from '../components/Router/PublicRoute';
 import GlobalStyles from '../styles/GlobalStyles';
 
-// Import your pages with correct paths
+
 const Home = lazy(() => import('../components/pages/Home'));
 const Login = lazy(() => import('../Auth/LoginPage/LoginForm'));
 const Register = lazy(() =>
   import('../Auth/RegistrationPage/RegistrationForm')
 );
-// const StatiscticsPage = lazy(() =>
-//   import('')
-// );
-// const CurrencyPage = lazy(() =>
-//   import('../pages/CurrencyMobilePage/CurrencyMobile')
-// );
+
+const CurrencyPage = lazy(() =>
+  import('../components/pages/CurrencyMob/CurrencyMobile')
+);
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ export const App = () => {
   useEffect(() => {
     if (!isLoggedIn && token) dispatch(refreshUser());
   }, [dispatch, isLoggedIn, token]);
+    const isMobile = useMediaQuery({ minWidth: 240, maxWidth: 767 });
 
   return (
     <>
@@ -47,11 +49,18 @@ export const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
+
           {isLoggedIn ? (
             <Route path="/home" element={<Home />} />
           ) : (
             <Route path="/login" element={<Login />} />
           )}
+           <Route
+          path="/currency"
+          element={
+            isMobile ? <CurrencyPage /> : <Navigate to={'/'} />
+          }
+        />
           {/* <Route
               path="/Money-Guard-App/statistics"
               element={
@@ -61,18 +70,6 @@ export const App = () => {
               }
             /> */}
 
-          {/* <Route
-              path="/Money-Guard-App/currency"
-              element={
-                isMobile ? (
-                  <PublicRoute>
-                    <CurrencyPage />
-                  </PublicRoute>
-                ) : (
-                  <Navigate to={'/Money-Guard-App/home'} />
-                )
-              }
-            /> */}
         </Routes>
       </Suspense>
       <ToastContainer />

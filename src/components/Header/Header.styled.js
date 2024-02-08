@@ -9,6 +9,8 @@ export const HeaderContainer = styled.header`
 export const Div = styled.div`
   max-width: 320px;
   width: 100%;
+  min-width: 100vw;
+
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     max-width: 768px;
   }

@@ -5,6 +5,9 @@ import './index.css';
 import { Provider } from 'react-redux';
 import { persistor, store } from './Redux/store';
 import { BrowserRouter } from 'react-router-dom';
+import GlobalStyles from './styles/GlobalStyles';
+import { Provider } from 'react-redux';
+import { store } from './Redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { HelmetProvider } from 'react-helmet-async';
 import GlobalStyles from './styles/GlobalStyles';
@@ -24,4 +27,5 @@ root.render(
       </Provider>
     </HelmetProvider>
   </React.StrictMode>
+
 );
