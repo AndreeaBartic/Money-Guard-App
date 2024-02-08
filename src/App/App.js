@@ -1,10 +1,7 @@
-
-import React, { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import React, { Suspense, lazy, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import { useMediaQuery } from 'react-responsive';
@@ -14,6 +11,8 @@ import { refreshUser } from '../Redux/authReducers/operations';
 import ProtectedRoute from '../components/Router/ProtectedRoute';
 // import PublicRoute from '../components/Router/PublicRoute';
 import GlobalStyles from '../styles/GlobalStyles';
+
+import StatisticsTab from '../components/pages/StatisticsTab/StatisticsTab';
 
 
 const Home = lazy(() => import('../components/pages/Home'));
@@ -61,14 +60,12 @@ export const App = () => {
             isMobile ? <CurrencyPage /> : <Navigate to={'/'} />
           }
         />
-          {/* <Route
-              path="/Money-Guard-App/statistics"
+          { <Route
+              path="/statistics"
               element={
-                <PublicRoute>
-                  <StatiscticsPage />
-                </PublicRoute>
+                  <StatisticsTab/>
               }
-            /> */}
+            /> }
 
         </Routes>
       </Suspense>
