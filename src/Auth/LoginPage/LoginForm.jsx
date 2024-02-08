@@ -1,7 +1,7 @@
 import { CustomButton } from '../../components/common/CustomButton';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import { logIn } from '../../redux/authReducers/operations';
+import { logIn } from '../../Redux/authReducers/operations';
 import { Formik } from 'formik';
 import Logotip from '../../images/svg/logo.svg';
 import {
