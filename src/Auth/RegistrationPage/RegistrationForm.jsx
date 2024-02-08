@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { register } from '../../redux/authReducers/operations';
+import { register } from '../../Redux/authReducers/operations';
 import { CustomButton } from '../../components/common/CustomButton';
 import { ErrorMessage, Formik } from 'formik';
 import * as Yup from 'yup';
@@ -34,31 +34,25 @@ const RegisterForm = () => {
   const dispatch = useDispatch();
   const [password, setPassword] = useState('');
 
- const handleSubmit = async (values, { resetForm }) => {
-   try {
-     const name = values.email.split('@')[0];
-     const formData = {
-       email: values.email.trim(),
-       password: values.password.trim(),
-       name,
-     };
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      const name = values.email.split('@')[0];
+      const formData = {
+        email: values.email.trim(),
+        password: values.password.trim(),
+        name,
+      };
 
-    
-     await dispatch(register(formData));
+      await dispatch(register(formData));
 
-     
-     resetForm();
-
-    
-    
-   } catch (error) {
-     
-     toast.error('A apărut o eroare. Vă rugăm să încercați din nou.', {
-       position: 'top-right',
-       autoClose: 3000,
-     });
-   }
- };
+      resetForm();
+    } catch (error) {
+      toast.error('A apărut o eroare. Vă rugăm să încercați din nou.', {
+        position: 'top-right',
+        autoClose: 3000,
+      });
+    }
+  };
   return (
     <Formik
       initialValues={{
