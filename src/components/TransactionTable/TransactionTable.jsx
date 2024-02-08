@@ -5,7 +5,9 @@ import {
   ButtonDelete,
   PencilEdit,
   Pencil,
+  TransactionWrapper,
 } from './TransactionTable.styled';
+import ButtonAddTransactions from 'components/ButtonAddTransactions';
 
 const formatDate = date => {
   const d = new Date(date);
@@ -61,15 +63,14 @@ export const TransactionTable = ({
                   </td>
                   <td>
                     <WrapperButtons>
-                      <li>
-                        <ButtonDelete
-                          onClick={() => {
-                            deleteTransactions(_id);
-                          }}
-                        >
-                          Delete
-                        </ButtonDelete>
-                      </li>
+                      <ButtonDelete
+                        onClick={() => {
+                          deleteTransactions(_id);
+                        }}
+                      >
+                        Delete
+                      </ButtonDelete>
+
                       <PencilEdit>
                         <Pencil onClick={() => handleEditClick(_id)} />
                         Edit
@@ -82,6 +83,9 @@ export const TransactionTable = ({
           )}
         </tbody>
       </TableStyle>
+      <TransactionWrapper>
+        <ButtonAddTransactions />
+      </TransactionWrapper>
     </ContainerHeader>
   );
 };

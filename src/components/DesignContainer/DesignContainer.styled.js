@@ -51,6 +51,7 @@ export const Background = styled.div`
     background: url(${backTab});
   }
   @media screen and (min-width: 1280px) {
+    min-height: calc(100vh - 100px);
     background: url(${backDes});
   }
 `;

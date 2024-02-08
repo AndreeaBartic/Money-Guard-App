@@ -10,9 +10,13 @@ import {
 } from 'redux-persist';
 
 import { modalReducer } from './modal/modalSlice';
+import { PersistedCurrencyReducer } from './currencyReducer/currencySlice';
+import { PersistedTransactionReducer } from './transactions/transactionsSlice';
 
 export const store = configureStore({
   reducer: {
+    currency: PersistedCurrencyReducer,
+    transactions: PersistedTransactionReducer,
     modal: modalReducer,
   },
   middleware: getDefaultMiddleware =>
