@@ -1,15 +1,18 @@
-// AppRouter.js
-
 import React, { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// import { useMediaQuery } from 'react-responsive';
+import { useAuth } from '../components/hooks';
+// import { SpinnerLoader } from '../components/Spinner/Spinner';
+import { refreshUser } from '../Redux/authReducers/operations';
 import ProtectedRoute from '../components/Router/ProtectedRoute';
 import PublicRoute from '../components/Router/PublicRoute';
-
-import { refreshUser } from '../Redux/authReducers/operations';
 // import { useAuth } from '../components/hooks';
+import StatisticsTab from '../components/pages/StatisticsTab/StatisticsTab';
 
 const Home = lazy(() => import('../components/pages/Home'));
 const RegistrationPage = lazy(() =>
@@ -57,6 +60,7 @@ function AppRouter() {
             }
           />
 
+
           {/* Public or Protected Route based on Mobile */}
           <Route
             path="currency"
@@ -70,6 +74,25 @@ function AppRouter() {
               )
             }
           />
+
+          {isLoggedIn ? (
+            <Route path="/home" element={<Home />} />
+          ) : (
+            <Route path="/login" element={<Login />} />
+          )}
+           <Route
+          path="/currency"
+          element={
+            isMobile ? <CurrencyPage /> : <Navigate to={'/'} />
+          }
+        />
+          { <Route
+              path="/statistics"
+              element={
+                  <StatisticsTab/>
+              }
+            /> }
+
 
           {/* Redirect to Home for any unknown routes */}
           <Route path="*" element={<Navigate to="/Money-Guard-App/home" />} />
