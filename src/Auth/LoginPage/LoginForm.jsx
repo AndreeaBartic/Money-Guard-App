@@ -1,75 +1,94 @@
-// LoginForm.js
-import React from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { CustomButton } from '../../components/common/CustomButton';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
-import './LoginForm.scss';
+import { logIn } from '../../redux/authReducers/operations';
+import { Formik } from 'formik';
+import Logotip from '../../images/svg/logo.svg';
+import {
+  EmailIcon,
+  FormStyled,
+  IconContainer,
+  IconInInput,
+  InputStyled,
+  LabelStyled,
+  PasswordIcon,
+} from './LoginForm.styled';
+import { toast } from 'react-toastify';
+import { LogotipStyled } from '../RegistrationPage/RegistrationForm.styled';
 
-const LoginForm = ({ onSubmit }) => {
-  const navigate = useNavigate();
+const ValidationSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email address').required('Required'),
+  password: Yup.string().required('Required'),
+});
 
-  const initialValues = {
-    email: '',
-    password: '',
-  };
+const LoginForm = () => {
+  const dispatch = useDispatch();
 
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Required'),
-    password: Yup.string()
-      .required('Required')
-      .min(6, 'Password must be at least 6 characters'),
-  });
+  const handleSubmit = async (values, { resetForm }) => {
+    const name = values.email.split('@')[0];
+    const formData = {
+      email: values.email.trim(),
+      password: values.password.trim(),
+    };
 
-  const handleSuccessfulAuth = () => {
-    navigate('/DashboardPage');
+    const result = await dispatch(logIn(formData));
+    if (result.error) {
+      toast.error('Login failed. Please check your credentials.', {
+        autoClose: 1200,
+      });
+    } else {
+      toast.success(`You have successfully logged in ${name}.`, {
+        autoClose: 1200,
+      });
+      resetForm();
+    }
   };
 
   return (
     <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={(values, actions) => {
-        onSubmit(values, actions);
-        handleSuccessfulAuth();
-      }}
+      initialValues={{ email: '', password: '' }}
+      validationSchema={ValidationSchema}
+      onSubmit={handleSubmit}
     >
-      <Form className="login-form">
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <Field
-            type="email"
-            id="email"
-            name="email"
-            className="input-field"
-            autoComplete="email"
+      <FormStyled>
+        <LogotipStyled>
+          <img
+            src={Logotip}
+            alt="Logo MoneyGuard"
+            width="36px"
+            height="36px"
+            draggable="false"
           />
-          <ErrorMessage
-            name="email"
-            component="div"
-            className="error-message"
-          />
-        </div>
+          <h3>MoneyGuard</h3>
+        </LogotipStyled>
 
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <Field
-            type="password"
-            id="password"
-            name="password"
-            className="input-field"
-            autoComplete="current-password"
-          />
-          <ErrorMessage
-            name="password"
-            component="div"
-            className="error-message"
-          />
-        </div>
+        <LabelStyled>
+          <IconInInput>
+            <IconContainer>
+              <EmailIcon />
+            </IconContainer>
+            <InputStyled name="email" type="email" placeholder="E-mail" />
+          </IconInInput>
+        </LabelStyled>
 
-        <button type="submit" className="submit-button">
-          Log in
-        </button>
-      </Form>
+        <LabelStyled>
+          <IconInInput>
+            <IconContainer>
+              <PasswordIcon />
+            </IconContainer>
+            <InputStyled
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
+          </IconInInput>
+        </LabelStyled>
+
+        <CustomButton type="submit">Log In</CustomButton>
+        <CustomButton isNavLink to="/Money-Guard-App/register">
+          Register
+        </CustomButton>
+      </FormStyled>
     </Formik>
   );
 };
