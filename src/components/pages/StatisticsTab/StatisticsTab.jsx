@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategories, fetchSummary } from 'redux/transactions/operations';
-import { selectTransactionsObj } from '../../../Redux/transactions/';
+import { selectTransactionsObj } from '../../../Redux/transactions';
 import {
   Chart,
   StatisticsDashboard,
   StatisticsTable,
-} from '../components/statistics';
+} from '../../../components/statistics';
 import {
   DashboardWrapper,
   StatSection,
