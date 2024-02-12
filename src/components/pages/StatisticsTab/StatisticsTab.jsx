@@ -1,65 +1,69 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCategories, fetchSummary } from 'redux/transactions/operations';
-import { selectTransactionsObj } from '../../../Redux/transactions/';
-import {
-  Chart,
-  StatisticsDashboard,
-  StatisticsTable,
-} from '../components/statistics';
-import {
-  DashboardWrapper,
-  StatSection,
-  StatsWrapper,
-  StyledTitle,
-} from './StatisticsTab.styled';
-import { useMyContext } from 'context/useMyContext';
-import { Modal } from '../components/Modal/Modal';
-import { Logout } from '../components/dashboard/Logout/Logout';
+// import { useEffect, useState } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// // import { fetchCategories, fetchSummary } from 'redux/transactions/operations';
+// // import { selectTransactionsObj } from '../../../Redux/transactions/';
+// // import {
+// //   Chart,
+// //   StatisticsDashboard,
+// //   StatisticsTable,
+// // } from '../components/statistics';
+// import { Chart } from '../../statistics/Chart/Chart';
+// import { StatisticsDashboard } from '../../statistics/StatisticsDashboard/StatisticsDashboard';
+// import { StatisticsTable } from '../../statistics/StatisticsTable/StatisticsTable';
 
-const StatisticsTab = () => {
-  const dispatch = useDispatch();
+// import {
+//   DashboardWrapper,
+//   StatSection,
+//   StatsWrapper,
+//   StyledTitle,
+// } from './StatisticsTab.styled';
+// // import { useMyContext } from 'context/useMyContext';
+// // import { Modal } from '../components/Modal/Modal';
+// // import { Logout } from '../components/dashboard/Logout/Logout';
 
-  const { isOpen, typeModal } = useMyContext();
+// const StatisticsTab = () => {
+//   const dispatch = useDispatch();
 
-  const [year, setYear] = useState(new Date().getFullYear());
-  const [month, setMonth] = useState(new Date().getMonth() + 1);
+//   // const { isOpen, typeModal } = useMyContext();
 
-  const { categories, summary } = useSelector(selectTransactionsObj);
+//   const [year, setYear] = useState(new Date().getFullYear());
+//   const [month, setMonth] = useState(new Date().getMonth() + 1);
 
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
+//   // const { categories, summary } = useSelector(selectTransactionsObj);
 
-  useEffect(() => {
-    dispatch(fetchSummary({ month, year }));
-  }, [year, month, dispatch]);
+//   // useEffect(() => {
+//   //   dispatch(fetchCategories());
+//   // }, [dispatch]);
 
-  const onYearChange = val => {
-    setYear(val.value);
-  };
-  const onMonthChange = val => {
-    setMonth(val.value);
-  };
+//   // useEffect(() => {
+//   //   dispatch(fetchSummary({ month, year }));
+//   // }, [year, month, dispatch]);
 
-  return (
-    <StatSection>
-      <StyledTitle>Statistics</StyledTitle>
-      <StatsWrapper>
-        <Chart categories={categories} statSummary={summary} />
-        <DashboardWrapper>
-          <StatisticsDashboard
-            selectedYear={year}
-            selectedMonth={month}
-            changeYear={onYearChange}
-            changeMonth={onMonthChange}
-          />
-          <StatisticsTable statSummary={summary} />
-        </DashboardWrapper>
-      </StatsWrapper>
-      {isOpen ? <Modal>{typeModal === 'exit' ? <Logout /> : ''}</Modal> : null}
-    </StatSection>
-  );
-};
+//   const onYearChange = val => {
+//     setYear(val.value);
+//   };
+//   const onMonthChange = val => {
+//     setMonth(val.value);
+//   };
 
-export default StatisticsTab;
+//   return (
+//     <StatSection>
+//       <StyledTitle>Statistics</StyledTitle>
+//       <StatsWrapper>
+//         {/* <Chart categories={categories} statSummary={summary} />
+//         <DashboardWrapper>
+//           <StatisticsDashboard
+//             selectedYear={year}
+//             selectedMonth={month}
+//             changeYear={onYearChange}
+//             changeMonth={onMonthChange}
+//           />
+//           <StatisticsTable statSummary={summary} /> */}
+//         </DashboardWrapper>
+//       </StatsWrapper>
+//       {/* {isOpen ? <Modal>{typeModal === 'exit' ? <Logout /> : ''}</Modal> : null} */}
+//     </StatSection>
+//   );
+// };
+
+// export default StatisticsTab;

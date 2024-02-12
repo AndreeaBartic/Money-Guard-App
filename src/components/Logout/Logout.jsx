@@ -1,8 +1,8 @@
-import Logotip from '../../images/logo.svg';
+import Logotip from '../../images/svg/logo.svg';
 import { useDispatch } from 'react-redux';
 import { LogoutBtn, LogoTitle, Text } from './Logout.styled';
-import { logOut } from '../../redux/authReducers/operations';
-import { toggleModal } from '../../redux/modal/modalSlice';
+import { logOut } from '../../Redux/authReducers/operations';
+import { toggleModal } from '../../Redux/modal/modalSlice';
 
 export default function Logout() {
   const dispatch = useDispatch();
