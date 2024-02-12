@@ -1,30 +1,77 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://moneyguardbackend.onrender.com/';
+axios.defaults.baseURL = 'https://wallet.b.goit.study/';
 
-const setAuthHeader = token => {
+export const setAuthToken = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-export const register = createAsyncThunk('auth/register', async credentials => {
-  const response = await axios.post('/users/register', credentials);
-  setAuthHeader(response.data.token);
-  return response.data;
+const clearAuthToken = () => {
+  axios.defaults.headers.common.Authorization = '';
+};
+
+export const register = createAsyncThunk(
+  'auth/register',
+  async (credential, thunkAPI) => {
+    try {
+      const res = await axios.post('/auth/sign-up', credential);
+      setAuthToken(res.data.token);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const logIn = createAsyncThunk(
+  'auth/login',
+  async (credential, thunkAPI) => {
+    try {
+      const res = await axios.post('/auth/sign-in', credential);
+      setAuthToken(res.data.token);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  try {
+    await axios.delete('/auth/sign-out');
+    clearAuthToken();
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
 });
 
-export const logIn = createAsyncThunk('auth/login', async credentials => {
-  const response = await axios.post('/users/login', credentials);
-  setAuthHeader(response.data.token);
-  return response.data;
-});
+export const refreshUser = createAsyncThunk(
+  'auth/userRefresh',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const prevToken = state.auth.token;
 
-export const logOut = createAsyncThunk('auth/logout', async () => {
-  await axios.post('/users/logout');
-  setAuthHeader('');
-});
+    if (!prevToken) return thunkAPI.rejectWithValue('Unauthorized');
 
-export const refreshUser = createAsyncThunk('auth/refresh', async () => {
-  const response = await axios.get('/users/current');
-  return response.data;
-});
+    try {
+      setAuthToken(prevToken);
+      const { data } = await axios.get('/users/current');
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const refreshUserBalance = createAsyncThunk(
+  'auth/userRefreshBalance',
+  async (_, thunkAPI) => {
+    try {
+      const { data } = await axios.get('/users/current');
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
