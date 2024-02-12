@@ -3,16 +3,16 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+// import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import { useMediaQuery } from 'react-responsive';
-import { useAuth } from '../components/hooks';
+// import { useAuth } from '../components/hooks';
 // import { SpinnerLoader } from '../components/Spinner/Spinner';
 import { refreshUser } from '../Redux/authReducers/operations';
-import ProtectedRoute from '../components/Router/ProtectedRoute';
+// import ProtectedRoute from '../components/Router/ProtectedRoute';
 import PublicRoute from '../components/Router/PublicRoute';
 // import { useAuth } from '../components/hooks';
-import StatisticsTab from '../components/pages/StatisticsTab/StatisticsTab';
+// import StatisticsTab from '../components/pages/StatisticsTab/StatisticsTab';
 
 const Home = lazy(() => import('../components/pages/Home'));
 const RegistrationPage = lazy(() =>
@@ -22,6 +22,9 @@ const LoginPage = lazy(() => import('../components/pages/LoginPage'));
 const CurrencyPage = lazy(() =>
   import('../components/pages/CurrencyMob/CurrencyMobile')
 );
+// const StatisticsTab = lazy(() =>
+//   import('../components/pages/StatisticsTab/StatisticsTab')
+// );
 
 function AppRouter() {
   const isMobile = useMediaQuery({ minWidth: 240, maxWidth: 767 });
@@ -54,12 +57,11 @@ function AppRouter() {
           <Route
             path="/Money-Guard-App/home"
             element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
+              // <ProtectedRoute>
+              <Home />
+              // </ProtectedRoute>
             }
           />
-
 
           {/* Public or Protected Route based on Mobile */}
           <Route
@@ -75,24 +77,16 @@ function AppRouter() {
             }
           />
 
-          {isLoggedIn ? (
+          {/* {isLoggedIn ? (
             <Route path="/home" element={<Home />} />
           ) : (
-            <Route path="/login" element={<Login />} />
-          )}
-           <Route
-          path="/currency"
-          element={
-            isMobile ? <CurrencyPage /> : <Navigate to={'/'} />
-          }
-        />
-          { <Route
-              path="/statistics"
-              element={
-                  <StatisticsTab/>
-              }
-            /> }
-
+            <Route path="/login" element={<LoginPage />} />
+          )} */}
+          <Route
+            path="/currency"
+            element={isMobile ? <CurrencyPage /> : <Navigate to={'/'} />}
+          />
+          {/* {<Route path="/statistics" element={<StatisticsTab />} />} */}
 
           {/* Redirect to Home for any unknown routes */}
           <Route path="*" element={<Navigate to="/Money-Guard-App/home" />} />
