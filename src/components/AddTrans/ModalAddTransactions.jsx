@@ -12,7 +12,7 @@ const ModalAddTransactions = ({ isOpen, onClose, children }) => {
         <button className="close-btn" onClick={onClose}>
           X
         </button>
-        <FormAddTransaction />
+        <FormAddTransaction onClose={onClose} />
       </div>
     </div>,
     document.body

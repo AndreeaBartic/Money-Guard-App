@@ -9,11 +9,10 @@ import 'react-toastify/dist/ReactToastify.css';
 // import { useAuth } from '../components/hooks';
 // import { SpinnerLoader } from '../components/Spinner/Spinner';
 import { refreshUser } from '../Redux/authReducers/operations';
-import ProtectedRoute from '../components/Router/ProtectedRoute';
-import PublicRoute from '../components/Router/PublicRoute';
+// import ProtectedRoute from '../components/Router/ProtectedRoute';
+// import PublicRoute from '../components/Router/PublicRoute';
 import { useAuth } from '../components/hooks';
 // import StatisticsTab from '../components/pages/StatisticsTab/StatisticsTab';
-import { DesignContainer } from '../components/DesignContainer/DesignContainer';
 
 const Home = lazy(() => import('../components/pages/Home'));
 const RegistrationPage = lazy(() =>
@@ -42,30 +41,29 @@ function AppRouter() {
           <Route
             path="/Money-Guard-App/register"
             element={
-              <PublicRoute redirectTo="/Money-Guard-App/home" restricted>
-                <RegistrationPage />
-              </PublicRoute>
+              // <PublicRoute redirectTo="/Money-Guard-App/home" restricted>
+              <RegistrationPage />
+              // </PublicRoute>
             }
           />
           <Route
             path="/Money-Guard-App/login"
             element={
-              <PublicRoute redirectTo="/Money-Guard-App/home" restricted>
-                <LoginPage />
-              </PublicRoute>
+              // <PublicRoute redirectTo="/Money-Guard-App/home" restricted>
+              <LoginPage />
+              // </PublicRoute>
             }
           />
-          <Route path="/Money-Guard-App" element={<DesignContainer />}>
-            <Route index element={<Navigate to="/home" />} />
-            <Route
-              path="home"
-              element={
-                <ProtectedRoute redirectTo="/login">
-                  <Home />
-                </ProtectedRoute>
-              }
-            />
-            {/* <Route
+
+          <Route
+            path="/Money-Guard-App/home"
+            element={
+              // <ProtectedRoute redirectTo="/login">
+              <Home />
+              // </ProtectedRoute>
+            }
+          />
+          {/* <Route
           path="statistics"
           element={
             <ProtectedRoute redirectTo="/login">
@@ -73,7 +71,7 @@ function AppRouter() {
             </ProtectedRoute>
           }
         /> */}
-            {/* <Route
+          {/* <Route
           path="currency"
           element={
             <ProtectedRoute redirectTo="/login">
@@ -81,7 +79,7 @@ function AppRouter() {
             </ProtectedRoute>
           }
         /> */}
-          </Route>
+
           <Route
             path="*"
             element={<Navigate to="/Money-Guard-App/home" replace={true} />}
