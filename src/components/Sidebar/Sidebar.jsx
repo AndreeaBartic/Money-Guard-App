@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 
@@ -7,12 +6,11 @@ import { NavigationBar } from '../NavigationBar/NavigationBar';
 import { Balance } from '../Balance/Balance';
 import { Currency } from '../Currency/Currency';
 import CurrencyMob from '../../components/pages/CurrencyMob/CurrencyMobile';
-import { selectCurrency } from '../../Redux/currencyReducer/currencySelectors';
 
 export const Sidebar = () => {
   const location = useLocation();
   const isMobile = useMediaQuery({ minWidth: 240, maxWidth: 767 });
-  const currency = useSelector(selectCurrency);
+  // const currency = useSelector(selectCurrency);
 
   const currencyActive = location.pathname.includes('/currency');
   const homeActive = location.pathname.includes('/home');
