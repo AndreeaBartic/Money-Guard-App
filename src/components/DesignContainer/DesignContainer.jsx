@@ -1,6 +1,6 @@
 import { Header } from '../Header/Header';
 import { Loader } from '../Loader/Loader';
-import { TransactionTable } from '../TransactionTable/TransactionTable';
+import TransactionTable from '../TransactionTable/TransactionTable';
 import { Sidebar } from '../Sidebar/Sidebar';
 import { TransactionCard } from '../../components/pages/TransactionCardMobile/TransactionCard';
 

@@ -1,162 +1,171 @@
-import styled from 'styled-components';
 import { AiOutlinePlus } from 'react-icons/ai';
-import { BiPencil } from 'react-icons/bi';
+import styled from 'styled-components';
+import backMob from '../../images/back-img/MobileBack.jpg';
+import backTab from '../../images/back-img/TabletBack.jpg';
+import backDes from '../../images/back-img/DesktopBack.jpg';
+
+export const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: 320px;
+  min-height: 568px;
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    max-width: 768px;
+    width: unset;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 715px;
+    height: 308px;
+    margin: 40px 0 0 69px;
+  }
+`;
 
 export const ContainerHeader = styled.div`
   width: 704px;
   height: 56px;
   border-radius: 8px;
-  margin: 40px 0 0 69px;
+  background: rgba(82, 59, 126, 0.6);
+  box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
 
   @media screen and (min-width: 1280px) {
     width: 715px;
     height: 67px;
   }
 `;
-export const TableStyle = styled.table`
-  width: 100%;
-  border-spacing: 0px;
-  border-collapse: collapse;
+
+export const TableHead = styled.div`
   color: var(--white);
-  thead {
-    width: 100%;
-
-    backdrop-filter: blur(50px);
-    border-radius: 8px;
-    tr {
-      width: 704px;
-    }
-    tr > th:first-child {
-      border-top-left-radius: 8px;
-      border-bottom-left-radius: 8px;
-      padding-left: 20px;
-    }
-    tr > th:nth-child(2) {
-      text-align: center;
-    }
-    tr > th:last-child {
-      border-top-right-radius: 8px;
-      border-bottom-right-radius: 8px;
-    }
-    th {
-      background: var(--background-table);
-      padding-block: 16px;
-      text-align: left;
-      font-size: 16px;
-      font-weight: 600;
-      line-height: 24px;
-    }
-  }
-  tbody {
-    tr > td {
-      padding-block: 16px;
-      text-align: left;
-      font-size: 14px;
-      line-height: 21px;
-    }
-    tr > td:nth-child(5) {
-      font-weight: 600;
-    }
-    tr > td:nth-child(2),
-    tr > td:first-child {
-      text-align: center;
-    }
-    tr:not(:last-child) {
-      border-bottom: 1px solid var(--transparency-20);
-    }
-    td > div {
-      .delete-button {
-        padding: 4px 12px;
-        border-radius: 18px;
-        background: var(--btn-gradient-color);
-        box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.2);
-        border: none;
-        color: var(--white-color);
-        text-align: center;
-        font-size: 14px;
-        line-height: normal;
-        &:hover,
-        &:focus {
-        background: var(--btn-hover-gradient);
-        }
-      }
-      .edit-button {
-        padding: 4px 12px;
-        background: transparent;
-        border: none;
-        text-align: center;
-        color: var(--transparency-60);
-        font-size: 16px;
-        line-height: normal;
-        letter-spacing: 0.32px;
-        &:hover,
-        &:focus {
-          svg{
-            fill: var(--white-color);
-          }
-        }
-      }
-    }
-  }
-
-  @media screen and (min-width: 1280px) {
-    tbody {
-        tr>td:first-child: text-align: center;
-    }
-  }
-`;
-export const WrapperButtons = styled.div`
+  width: 543px;
+  height: 24px;
   display: flex;
   justify-content: space-between;
-  padding: 12px 20px;
-`;
-export const ButtonDelete = styled(AiOutlinePlus)`
-  && {
-    margin: 0;
-    width: 69px;
-    height: 29px;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 400;
-    text-transform: capitalize;
-  }
-`;
-
-export const PencilEdit = styled.li`
-  display: flex;
+  font-weight: 600;
+  margin-left: 20px;
   align-items: center;
-  color: #c2b1d6;
-  cursor: pointer;
-`;
+  height: 100%;
 
-export const Pencil = styled(BiPencil)`
-  && {
-    margin-right: 5px;
+  @media screen and (min-width: 1280px) {
+    width: 565px;
   }
 `;
-export const TransactionWrapper = styled.div`
-  .transaction-add-button {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    border-radius: 50%;
-    border: none;
-    background: var(--btn-gradient-color);
-    color: var(--white);
-    width: 44px;
-    height: 44px;
-    box-shadow: 1px 9px 15px 0px var(--transparency-20);
-    &:hover,
-    &:focus {
-      background: var(--btn-hover-gradient);
-    }
-    svg {
-      width: 28px;
-      height: 28px;
-    }
+
+export const Data = styled.div`
+  color: var(--white);
+`;
+
+export const TableRow = styled.div`
+  color: var(--white);
+  width: 684px;
+  height: 53px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.41);
+  align-items: center;
+  margin-left: 20px;
+  font-size: 14px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
+export const TableDataDate = styled.div`
+  width: 63px;
+`;
+
+export const TableDataType = styled.div`
+  width: 11px;
+  margin-left: 60px;
+`;
+
+export const TableDataCategory = styled.div`
+  width: 70px;
+  margin-left: 70px;
+`;
+
+export const TableDataComment = styled.div`
+  width: 114px;
+  margin-left: 50px;
+
+  @media screen and (min-width: 1280px) {
+    margin-left: 90px;
+  }
+`;
+
+export const TableDataColor = styled.div`
+  width: 70px;
+  margin-right: 35px;
+  color: ${props => (props.type === 'expense' ? '#ff868d' : 'var(--yellow)')};
+  text-align: end;
+`;
+
+export const PencilButton = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: 91px;
+`;
+
+export const CustomButton = styled.div`
+  height: 29px;
+  display: flex;
+  padding: 4px 12px;
+  align-items: center;
+  border-radius: 20px;
+  background: var(
+    --button-gradient,
+    linear-gradient(97deg, #ffc727 -16.42%, #9e40ba 97.04%, #7000ff 150.71%)
+  );
+  box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.2);
+`;
+
+export const AddButton = styled.button`
+  position: absolute;
+  display: flex;
+  bottom: 40px;
+  right: 40px;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(
+    97deg,
+    rgba(255, 199, 39, 1) -16.42%,
+    rgba(158, 64, 186, 1) 97.04%,
+    rgba(112, 0, 255, 1) 150.71%
+  );
+  border: none;
+  border-radius: 20px;
+  line-height: 1.5;
+  font-size: 0;
+  color: rgba(251, 251, 251, 1);
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  cursor: pointer;
+
+  @media screen and (max-width: 767px) {
+    bottom: 10px;
+    right: 137.5px;
+  }
+`;
+
+export const TableData = styled.div`
+  width: 70px;
+  margin-left: 70px;
+`;
+export const Background = styled.div`
+  background: url(${backMob});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-width: 100vw;
+  min-height: calc(100vh - 61.38px);
+  @media screen and (min-width: 768px) {
+    min-height: calc(100vh - 86px);
+    background: url(${backTab});
+  }
+  @media screen and (min-width: 1280px) {
+    min-height: calc(100vh - 100px);
+    background: url(${backDes});
   }
 `;

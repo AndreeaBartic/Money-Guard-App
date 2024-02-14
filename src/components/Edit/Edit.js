@@ -16,13 +16,13 @@ import { forwardRef, useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
-import { toggleModal } from '../../redux/modal/modalSlice.js';
+import { toggleModal } from '../../Redux/modal/modalSlice';
 import { CustomSelect } from '../../components/SelectCategory.js';
 import { CustomSwitch } from '../../components/CustomSwitch/CustomSwitch.js';
 import { RiCalendar2Fill } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
-import { editItem } from '../../redux/transactions/transactionsOperations.js';
-import { selectorTransactions } from '../../redux/transactions/transactionsSelectors.js';
+import { editItem } from '../../Redux/transactions/transactionsOperations';
+import { selectorTransactions } from '../../Redux/transactions/transactionsSelectors';
 
 const addSchema = object({
   value: number().positive().required('Amount is required'),

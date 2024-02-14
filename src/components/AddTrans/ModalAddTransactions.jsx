@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FormAddTransaction from './FormAddTransactions';
-
 const ModalAddTransactions = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
-
   return ReactDOM.createPortal(
     <div className="modal-backdrop">
       <div className="modal-content">
@@ -18,5 +16,4 @@ const ModalAddTransactions = ({ isOpen, onClose, children }) => {
     document.body
   );
 };
-
 export default ModalAddTransactions;

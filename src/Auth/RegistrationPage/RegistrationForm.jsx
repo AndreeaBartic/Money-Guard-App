@@ -1,7 +1,6 @@
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { register } from '../../Redux/authReducers/operations';
-// import ProgressBar from 'react-password-strength-bar';
 import * as Yup from 'yup';
 // import {
 //   Card,
@@ -22,11 +21,10 @@ import { ReactComponent as CloseShield } from '../../images/svg/close.shield.svg
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link, useNavigate } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { CustomButton } from '../../components/common/CustomButton';
-// import { ErrorMessage, Formik } from 'formik';
-// import * as Yup from 'yup';
 // import Logotip from '../../images/svg/logo.svg';
 import {
   // EmailIcon,
@@ -46,8 +44,7 @@ import {
   ErrorRegister,
   IconWrapper,
 } from '../../Auth/RegistrationPage/RegistrationForm.styled';
-// import { LogotipStyled } from './RegistrationForm.styled';
-import { ProgressBar } from './ProgressBar.styled';
+import PasswordStrengthBar from 'react-password-strength-bar';
 
 export const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -196,7 +193,7 @@ export const RegisterForm = () => {
               {formik.errors.confirmPassword}
             </ErrorRegister>
           ) : null}
-          <ProgressBar
+          <PasswordStrengthBar
             scoreWords={[
               'too short',
               'weak',
@@ -208,9 +205,11 @@ export const RegisterForm = () => {
             password={formik.values.password}
           />
         </InputWrapper>
-        <div className="CustomButton-wrapper">
-          <CustomButton type="submit" text="Register" isGradient={true} />
-          <Link to="/login">Login</Link>
+        <div className="button-wrapper">
+          <CustomButton type="submit">Register</CustomButton>
+          <CustomButton isNavLink to="/login">
+            Log In
+          </CustomButton>
         </div>
       </FormRegister>
       <ToastContainer

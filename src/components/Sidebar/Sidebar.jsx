@@ -1,13 +1,11 @@
-import { SidebarStyled, Graphics, Line } from './Sidebar.styled';
+import { useLocation } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
+import { SidebarStyled, Graphics, Line } from './Sidebar.styled';
 import { NavigationBar } from '../NavigationBar/NavigationBar';
 import { Balance } from '../Balance/Balance';
 import { Currency } from '../Currency/Currency';
 import CurrencyMob from '../../components/pages/CurrencyMob/CurrencyMobile';
-// import { selectCurrency } from '../../Redux/currencyReducer/currencySelectors';
-// import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
 
 export const Sidebar = () => {
   const location = useLocation();

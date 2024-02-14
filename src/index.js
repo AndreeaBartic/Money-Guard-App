@@ -21,10 +21,3 @@ root.render(
     </ReduxProvider>
   </React.StrictMode>
 );
-
-// ReactDOM.createRoot(document.getElementById('root')).render(
-//     <GlobalStyles />
-//     <Provider store={store}>
-//       <AppRouter />
-//     </Provider>
-// );

@@ -39,7 +39,7 @@ export const logIn = createAsyncThunk(
 
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
-    await axios.delete('/auth/sign-out');
+    await axios.delete('/api/auth/sign-out');
     clearAuthToken();
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -56,7 +56,7 @@ export const refreshUser = createAsyncThunk(
 
     try {
       setAuthToken(prevToken);
-      const { data } = await axios.get('/users/current');
+      const { data } = await axios.get('/api/users/current');
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -68,7 +68,7 @@ export const refreshUserBalance = createAsyncThunk(
   'auth/userRefreshBalance',
   async (_, thunkAPI) => {
     try {
-      const { data } = await axios.get('/users/current');
+      const { data } = await axios.get('/api/users/current');
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
