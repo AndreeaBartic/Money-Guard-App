@@ -1,7 +1,7 @@
 import { DesignContainer } from 'components/DesignContainer/DesignContainer';
 import React from 'react';
 import { Container } from '../Container/Container';
-import ButtonAddTransactions from 'components/ButtonAddTransactions';
+import ButtonAddTransactions from 'components/AddTrans/ButtonAddTransactions';
 
 const Home = () => {
   return (

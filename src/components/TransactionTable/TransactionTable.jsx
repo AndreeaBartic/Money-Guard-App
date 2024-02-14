@@ -15,13 +15,12 @@ import {
   TableDataColor,
   PencilButton,
   CustomButton,
-  PencilEdit,
-  Pencil,
+
   // AddButton,
 } from './TransactionTable.styled';
 import { selectIsLoading } from '../../Redux/transactions/transactionsSelectors';
 import Modal from '../../components/Modal/Modal';
-import AddTransaction from '../../components/FormAddTransactions';
+import AddTransaction from '../../components/AddTrans/FormAddTransactions';
 import EditTransaction from '../../components/Edit/Edit';
 import Logout from '../../components/Logout/Logout';
 import { toggleEditModal } from '../../Redux/modal/modalSlice';
@@ -165,10 +164,10 @@ const TransactionTable = () => {
           <Modal children={<Logout />} showCloseIcon={false} />
         )}
       </Container>
-      <PencilEdit>
-        <Pencil onClick={() => handleEditClick()} />
+      <PencilButton>
+        <BiPencil onClick={() => handleEditClick()} />
         Edit
-      </PencilEdit>
+      </PencilButton>
     </>
   );
 };

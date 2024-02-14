@@ -17,7 +17,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 import { toggleModal } from '../../Redux/modal/modalSlice';
-import { CustomSelect } from '../../components/SelectCategory.js';
+import { CustomSelect } from '../../components/AddTrans/SelectCategory.js';
 import { CustomSwitch } from '../../components/CustomSwitch/CustomSwitch.js';
 import { RiCalendar2Fill } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';

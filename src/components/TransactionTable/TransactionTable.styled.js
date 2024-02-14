@@ -1,4 +1,3 @@
-import { AiOutlinePlus } from 'react-icons/ai';
 import styled from 'styled-components';
 import backMob from '../../images/back-img/MobileBack.jpg';
 import backTab from '../../images/back-img/TabletBack.jpg';
