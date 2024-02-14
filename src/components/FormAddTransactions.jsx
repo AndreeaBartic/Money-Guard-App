@@ -14,47 +14,29 @@ import {
   ErrorMessageStyled,
   CancelBtn,
 } from './Form.styled';
-// import { useDispatch } from 'react-redux';
-// import { toggleModal } from 'redux/modal/ModalSlice';
-
-import { CustomSwitch } from './CustomSwitch/CustomSwitch';
-// import { addTransaction } from 'redux/transactionsRedux/transactionsOperations';
+import { useDispatch } from 'react-redux';
+import { CustomSwitch } from 'components/CustomSwitch/CustomSwitch';
+import { addTransaction } from '../Redux/transactions/transactionsOperations';
 import { RiCalendar2Fill } from 'react-icons/ri';
 import { CustomSelect } from './SelectCategory';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
 import { forwardRef, useState, useEffect } from 'react';
 import axios from 'axios';
-
 const addSchema = object({
-  value: number().positive().required('Amount is required'),
+  amount: number().positive().required('Amount is required'),
   comment: string()
     .max(30, 'Maximum must be 30 characters')
     .required('Please fill in comment'),
-  category: string()
-    .min(3)
-    .oneOf([
-      'Main expenses',
-      'Products',
-      'Car',
-      'Self care',
-      'Child care',
-      'Household products',
-      'Education',
-      'Leisure',
-      'Other expenses',
-      'Entertainment',
-    ]),
+  categoryId: string().min(3),
 });
 const initialValues = {
-  type: 'expense',
-  category: '',
-  value: '',
-  date: new Date(),
+  type: 'EXPENSE',
+  categoryId: '',
+  amount: 0,
+  transactionDate: new Date(),
   comment: '',
 };
-
 const CustomInput = forwardRef(({ value, onClick }, ref) => (
   <>
     <button type="button" className="custom-input" onClick={onClick} ref={ref}>
@@ -63,48 +45,44 @@ const CustomInput = forwardRef(({ value, onClick }, ref) => (
     <RiCalendar2Fill className="date-icon" onClick={onClick} />
   </>
 ));
-
-function FormAddTransaction() {
-  // const dispatch = useDispatch();
-  // const error = useSelector(selectError);
-
-  const [categories, setCategories] = useState(() => {
-    return JSON.parse(window.localStorage.getItem('categories')) ?? [];
-  });
-
-  const getCategories = async () => {
-    try {
-      const response = await axios.get(`/transactions/categories`);
-      setCategories(response.data);
-    } catch (error) {
-      return error.message;
-    }
-  };
-
+function FormAddTransaction({ onClose }) {
+  const dispatch = useDispatch();
+  const [categories, setCategories] = useState(
+    () => JSON.parse(window.localStorage.getItem('categories')) ?? []
+  );
   useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const response = await axios.get(`/api/transaction-categories`);
+        setCategories(response.data);
+      } catch (error) {
+        return error.message;
+      }
+    };
     if (categories.length === 0) {
       getCategories();
     }
-
     localStorage.setItem('categories', JSON.stringify(categories));
-  }, [categories]);
-
+  });
+  console.log(categories);
   const optionCategories = categories.map(category => {
     return {
-      value: category,
-      label: category,
+      value: category.id,
+      label: category.name,
     };
   });
-
+  console.log(categories);
   const handleSubmit = (values, { resetForm }) => {
-    // dispatch(addTransaction(values));
-    // resetForm();
-    // dispatch(toggleModal());
-  };
-  const closeClick = e => {
-    if (e.target.name === 'cancel') {
-      console.log('clicked');
-    }
+    // console.log(values);
+    // const adjustedValues = {
+    //   ...values,
+    //   amount:
+    //     values.type === 'EXPENSE'
+    //       ? -Math.abs(values.amount)
+    //       : Math.abs(values.amount),
+    // };
+    dispatch(addTransaction(values));
+    resetForm();
   };
   return (
     <>
@@ -114,65 +92,76 @@ function FormAddTransaction() {
         validationSchema={addSchema}
         onSubmit={handleSubmit}
       >
-        {({ values, setFieldValue, validate }) => (
-          <StyledForm autoComplete="off">
-            <SwitcherWrapper>
-              <CustomSwitch
-                checked={values.type === 'expense'}
-                onChange={isChecked => {
-                  setFieldValue('type', isChecked ? 'expense' : 'income');
-                }}
-              />
-            </SwitcherWrapper>
-            {values.type === 'expense' ? (
-              <>
-                <CustomSelect
-                  options={optionCategories}
-                  value={values.category}
-                  onChange={value => setFieldValue('category', value.value)}
-                  className="Select"
-                  name="category"
+        {formikProps => {
+          const { values, setFieldValue } = formikProps;
+          const handleTypeChange = isChecked => {
+            const newType = isChecked ? 'EXPENSE' : 'INCOME';
+            setFieldValue('type', newType);
+            if (newType !== 'EXPENSE') {
+              setFieldValue('categoryId', '');
+            }
+          };
+          return (
+            <StyledForm autoComplete="off">
+              <SwitcherWrapper>
+                <CustomSwitch
+                  checked={values.type === 'EXPENSE'}
+                  onChange={isChecked => handleTypeChange(isChecked)}
                 />
-                <ErrorMessageStyled name="category" component="div" />
-              </>
-            ) : (
-              (values.category = '')
-            )}
-            <Wrapper>
-              <Label>
-                <StyledSum type="number" name="value" placeholder="0.00" />
-                <ErrorMessageStyled name="value" component="div" />
-              </Label>
-              <Label>
-                <Field name="date" validate={validate}>
-                  {() => (
-                    <DatePicker
-                      name="date"
-                      dateFormat="dd.MM.yyyy"
-                      maxDate={new Date()}
-                      selected={values.date || null}
-                      onChange={date => setFieldValue('date', date)}
-                      shouldCloseOnSelect={true}
-                      customInput={<CustomInput />}
-                    />
-                  )}
-                </Field>
-              </Label>
-            </Wrapper>
-            <StyledLabel>
-              <StyledComment
-                type="textarea"
-                name="comment"
-                placeholder="Comment"
-              />
-              <ErrorMessageStyled name="comment" component="div" />
-            </StyledLabel>
-            <AddBtn type="submit">Add</AddBtn>
-            <CancelBtn name="cancel" type="button" onClick={closeClick}>
-              Cancel
-            </CancelBtn>
-          </StyledForm>
-        )}
+              </SwitcherWrapper>
+              {values.type === 'EXPENSE' && (
+                <>
+                  <CustomSelect
+                    options={optionCategories}
+                    value={values.categoryId}
+                    onChange={option => {
+                      console.log('Selected category:', option);
+                      setFieldValue('categoryId', option);
+                    }}
+                    className="Select"
+                    name="category"
+                  />
+                  <ErrorMessageStyled name="categoryId" component="div" />
+                </>
+              )}
+              <Wrapper>
+                <Label>
+                  <StyledSum type="number" name="amount" placeholder="0.00" />
+                  <ErrorMessageStyled name="amount" component="div" />
+                </Label>
+                <Label>
+                  <Field name="transactionDate">
+                    {() => (
+                      <DatePicker
+                        name="transactionDate"
+                        dateFormat="dd.MM.yyyy"
+                        maxDate={new Date()}
+                        selected={values.transactionDate || null}
+                        onChange={transactionDate =>
+                          setFieldValue('transactionDate', transactionDate)
+                        }
+                        shouldCloseOnSelect={true}
+                        customInput={<CustomInput />}
+                      />
+                    )}
+                  </Field>
+                </Label>
+              </Wrapper>
+              <StyledLabel>
+                <StyledComment
+                  type="textarea"
+                  name="comment"
+                  placeholder="Comment"
+                />
+                <ErrorMessageStyled name="comment" component="div" />
+              </StyledLabel>
+              <AddBtn type="submit">Add</AddBtn>
+              <CancelBtn name="cancel" type="button" onClick={onClose}>
+                Cancel
+              </CancelBtn>
+            </StyledForm>
+          );
+        }}
       </Formik>
     </>
   );
