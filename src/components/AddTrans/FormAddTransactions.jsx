@@ -16,13 +16,14 @@ import {
 } from './Form.styled';
 import { useDispatch } from 'react-redux';
 import { CustomSwitch } from 'components/CustomSwitch/CustomSwitch';
-import { addTransaction } from '../Redux/transactions/transactionsOperations';
+import { addTransaction } from '../../Redux/transactions/transactionsOperations';
 import { RiCalendar2Fill } from 'react-icons/ri';
 import { CustomSelect } from './SelectCategory';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { forwardRef, useState, useEffect } from 'react';
 import axios from 'axios';
+
 const addSchema = object({
   amount: number().positive().required('Amount is required'),
   comment: string()
@@ -37,6 +38,7 @@ const initialValues = {
   transactionDate: new Date(),
   comment: '',
 };
+
 const CustomInput = forwardRef(({ value, onClick }, ref) => (
   <>
     <button type="button" className="custom-input" onClick={onClick} ref={ref}>
@@ -45,6 +47,7 @@ const CustomInput = forwardRef(({ value, onClick }, ref) => (
     <RiCalendar2Fill className="date-icon" onClick={onClick} />
   </>
 ));
+
 function FormAddTransaction({ onClose }) {
   const dispatch = useDispatch();
   const [categories, setCategories] = useState(
@@ -54,14 +57,17 @@ function FormAddTransaction({ onClose }) {
     const getCategories = async () => {
       try {
         const response = await axios.get(`/api/transaction-categories`);
+
         setCategories(response.data);
       } catch (error) {
         return error.message;
       }
     };
+
     if (categories.length === 0) {
       getCategories();
     }
+
     localStorage.setItem('categories', JSON.stringify(categories));
   });
   console.log(categories);
@@ -72,18 +78,20 @@ function FormAddTransaction({ onClose }) {
     };
   });
   console.log(categories);
+
   const handleSubmit = (values, { resetForm }) => {
-    // console.log(values);
-    // const adjustedValues = {
-    //   ...values,
-    //   amount:
-    //     values.type === 'EXPENSE'
-    //       ? -Math.abs(values.amount)
-    //       : Math.abs(values.amount),
-    // };
-    dispatch(addTransaction(values));
+    console.log(values);
+    const adjustedValues = {
+      ...values,
+      amount:
+        values.type === 'EXPENSE'
+          ? -Math.abs(values.amount)
+          : Math.abs(values.amount),
+    };
+    dispatch(addTransaction(adjustedValues));
     resetForm();
   };
+
   return (
     <>
       <AddTitle>Add transaction</AddTitle>
@@ -94,13 +102,16 @@ function FormAddTransaction({ onClose }) {
       >
         {formikProps => {
           const { values, setFieldValue } = formikProps;
+
           const handleTypeChange = isChecked => {
             const newType = isChecked ? 'EXPENSE' : 'INCOME';
             setFieldValue('type', newType);
+
             if (newType !== 'EXPENSE') {
               setFieldValue('categoryId', '');
             }
           };
+
           return (
             <StyledForm autoComplete="off">
               <SwitcherWrapper>

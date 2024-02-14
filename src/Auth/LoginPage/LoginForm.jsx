@@ -15,6 +15,7 @@ import {
 } from './LoginForm.styled';
 import { toast } from 'react-toastify';
 import { LogotipStyled } from '../RegistrationPage/RegistrationForm.styled';
+import { useNavigate } from 'react-router-dom';
 
 const ValidationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email address').required('Required'),
@@ -23,6 +24,7 @@ const ValidationSchema = Yup.object().shape({
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (values, { resetForm }) => {
     const name = values.email.split('@')[0];
@@ -40,6 +42,7 @@ const LoginForm = () => {
       toast.success(`You have successfully logged in ${name}.`, {
         autoClose: 1200,
       });
+      navigate('/Money-Guard-App/home');
       resetForm();
     }
   };

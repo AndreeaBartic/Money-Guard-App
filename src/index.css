@@ -1,5 +1,6 @@
 @import url('./styles/globalVars.css');
 @import url('./styles/fonts.css');
+
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -16,6 +17,7 @@
   opacity: 1;
   visibility: visible;
 }
+
 .modal-content {
   background: radial-gradient(circle at center, #734aef, #623f8b);
   width: 511px;

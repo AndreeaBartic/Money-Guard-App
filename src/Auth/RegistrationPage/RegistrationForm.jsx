@@ -22,6 +22,7 @@ import { ReactComponent as CloseShield } from '../../images/svg/close.shield.svg
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { CustomButton } from '../../components/common/CustomButton';
 // import Logotip from '../../images/svg/logo.svg';
@@ -49,7 +50,7 @@ export const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -86,6 +87,7 @@ export const RegisterForm = () => {
           toast.error('Access Forbidden: User with such email already exists');
         } else {
           toast.success('Successfully logged in!');
+          navigate('Money-Guard-App/home');
         }
       } catch (error) {
         toast.error('An error occurred: ' + error.message);

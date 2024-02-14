@@ -15,6 +15,8 @@ import {
   TableDataColor,
   PencilButton,
   CustomButton,
+  PencilEdit,
+  Pencil,
   // AddButton,
 } from './TransactionTable.styled';
 import { selectIsLoading } from '../../Redux/transactions/transactionsSelectors';
@@ -70,100 +72,109 @@ const TransactionTable = () => {
   const top5Transactions = sortedTransactions.slice(0, 5);
 
   return (
-    <Container>
-      {!isMobile ? (
-        <ContainerHeader>
-          <TableHead>
-            <div>Date</div>
-            <div>Type</div>
-            <div>Category</div>
-            <div>Comment</div>
-            <div>Sum</div>
-          </TableHead>
-          <Data>
-            {isLoading ? (
-              <TableRow>
-                <div>
-                  <RotatingLines visible={true} height="80" width="80" />
-                </div>
-              </TableRow>
-            ) : (
-              top5Transactions.map(
-                ({
-                  transactionDate,
-                  // createdAt,
-                  type,
-                  categoryId,
-                  comment,
-                  amount,
-                  _id,
-                }) => {
-                  // let date = new Date(createdAt).toLocaleDateString();
-                  let numberSign = '+';
-                  let colorClassName = 'colorIncome';
-                  if (type === 'expense') {
-                    numberSign = '-';
-                    colorClassName = 'colorExpense';
+    <>
+      <Container>
+        {!isMobile ? (
+          <ContainerHeader>
+            <TableHead>
+              <div>Date</div>
+              <div>Type</div>
+              <div>Category</div>
+              <div>Comment</div>
+              <div>Sum</div>
+            </TableHead>
+            <Data>
+              {isLoading ? (
+                <TableRow>
+                  <div>
+                    <RotatingLines visible={true} height="80" width="80" />
+                  </div>
+                </TableRow>
+              ) : (
+                top5Transactions.map(
+                  ({
+                    transactionDate,
+                    // createdAt,
+                    type,
+                    categoryId,
+                    comment,
+                    amount,
+                    _id,
+                  }) => {
+                    // let date = new Date(createdAt).toLocaleDateString();
+                    let numberSign = '+';
+                    let colorClassName = 'colorIncome';
+                    if (type === 'expense') {
+                      numberSign = '-';
+                      colorClassName = 'colorExpense';
+                    }
+                    return (
+                      <TableRow key={_id} className="data">
+                        <TableDataDate>{transactionDate}</TableDataDate>
+                        <TableDataType>{numberSign}</TableDataType>
+                        {type === 'income' ? (
+                          <TableData>Income</TableData>
+                        ) : (
+                          <TableDataCategory>
+                            {categoryId.name}
+                          </TableDataCategory>
+                        )}
+                        <TableDataComment>{comment}</TableDataComment>
+
+                        <TableDataColor type={type} className={colorClassName}>
+                          {amount}
+                        </TableDataColor>
+                        <PencilButton>
+                          <BiPencil onClick={() => handleEditClick(_id)} />
+                          <CustomButton
+                            style={{}}
+                            className="deleteItem"
+                            onClick={() => {
+                              deleteTransactions(_id);
+                            }}
+                          >
+                            Delete
+                          </CustomButton>
+                        </PencilButton>
+                      </TableRow>
+                    );
                   }
-                  return (
-                    <TableRow key={_id} className="data">
-                      <TableDataDate>{transactionDate}</TableDataDate>
-                      <TableDataType>{numberSign}</TableDataType>
-                      {type === 'income' ? (
-                        <TableData>Income</TableData>
-                      ) : (
-                        <TableDataCategory>{categoryId.name}</TableDataCategory>
-                      )}
-                      <TableDataComment>{comment}</TableDataComment>
+                )
+              )}
+            </Data>
+          </ContainerHeader>
+        ) : (
+          // Render Cards
+          <>
+            <ScrollToTopButton />
+            <TransactionCard
+              transactions={top5Transactions}
+              handleEditClick={handleEditClick}
+              deleteTransactions={deleteTransactions}
+            />
+          </>
+        )}
 
-                      <TableDataColor type={type} className={colorClassName}>
-                        {amount}
-                      </TableDataColor>
-                      <PencilButton>
-                        <BiPencil onClick={() => handleEditClick(_id)} />
-                        <CustomButton
-                          style={{}}
-                          className="deleteItem"
-                          onClick={() => {
-                            deleteTransactions(_id);
-                          }}
-                        >
-                          Delete
-                        </CustomButton>
-                      </PencilButton>
-                    </TableRow>
-                  );
-                }
-              )
-            )}
-          </Data>
-        </ContainerHeader>
-      ) : (
-        // Render Cards
-        <>
-          <ScrollToTopButton />
-          <TransactionCard
-            transactions={top5Transactions}
-            handleEditClick={handleEditClick}
-            deleteTransactions={deleteTransactions}
-          />
-        </>
-      )}
-
-      {modalType === 'modal/toggleAddModal' && isModalOpen && (
-        <Modal children={<AddTransaction />} />
-      )}
-      {modalType === 'modal/toggleEditModal' && isModalOpen && (
-        <Modal children={<EditTransaction id={id} />} />
-      )}
-      {modalType === 'modal/toggleLogOutModal' && isModalOpen && (
-        <Modal children={<Logout />} showCloseIcon={false} />
-      )}
-    </Container>
+        {modalType === 'modal/toggleAddModal' && isModalOpen && (
+          <Modal children={<AddTransaction />} />
+        )}
+        {modalType === 'modal/toggleEditModal' && isModalOpen && (
+          <Modal children={<EditTransaction id={id} />} />
+        )}
+        {modalType === 'modal/toggleLogOutModal' && isModalOpen && (
+          <Modal children={<Logout />} showCloseIcon={false} />
+        )}
+      </Container>
+      <PencilEdit>
+        <Pencil onClick={() => handleEditClick()} />
+        Edit
+      </PencilEdit>
+    </>
   );
 };
 
 export default TransactionTable;
+
 // import {
 //   ContainerHeader,
 //   TableStyle,
