@@ -1,77 +1,86 @@
+// operations.js
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
-axios.defaults.baseURL = 'https://wallet.b.goit.study/';
+axios.defaults.baseURL =
+  'https://wallet.b.goit.study/api/';
 
-export const setAuthToken = token => {
+const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-const clearAuthToken = () => {
+const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
 export const register = createAsyncThunk(
-  'auth/register',
-  async (credential, thunkAPI) => {
+  'auth/sign-up',
+  async (credentials, { rejectWithValue }) => {
     try {
-      const res = await axios.post('/auth/sign-up', credential);
-      setAuthToken(res.data.token);
-      return res.data;
+      const response = await axios.post('/auth/sign-up', credentials);
+      setAuthHeader(response.data.token);
+      if (response.data && response.status === 201) {
+        const name = credentials.name;
+        toast.success(`Welcome to Money Guard, ${name}!`, {
+          autoClose: 1200,
+        });
+      }
+      return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      if (error.response) {
+        if (error.response.status === 409) {
+          toast.error('Email is already in use!', {
+            position: 'top-right',
+            autoClose: 1200,
+          });
+          return rejectWithValue(error.message);
+        }
+      }
     }
   }
 );
 
 export const logIn = createAsyncThunk(
-  'auth/login',
-  async (credential, thunkAPI) => {
+  'auth/sign-in',
+  async (credentials, { rejectWithValue }) => {
     try {
-      const res = await axios.post('/auth/sign-in', credential);
-      setAuthToken(res.data.token);
-      return res.data;
+      const response = await axios.post('/auth/sign-in', credentials);
+      setAuthHeader(response.data.token);
+      return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );
 
-export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
-  try {
-    await axios.delete('/auth/sign-out');
-    clearAuthToken();
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+export const logOut = createAsyncThunk(
+  'auth/sign-out',
+  async (_, { rejectWithValue }) => {
+    try {
+      await axios.post('/auth/sign-out');
+      clearAuthHeader();
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
-});
+);
 
 export const refreshUser = createAsyncThunk(
-  'auth/userRefresh',
-  async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const prevToken = state.auth.token;
+  'user/refresh',
+  async (_, { rejectWithValue, getState }) => {
+    const state = getState();
+    const persistedToken = state.auth.token;
 
-    if (!prevToken) return thunkAPI.rejectWithValue('Unauthorized');
-
-    try {
-      setAuthToken(prevToken);
-      const { data } = await axios.get('/users/current');
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+    if (persistedToken === null) {
+      return rejectWithValue('Unable to fetch user');
     }
-  }
-);
-
-export const refreshUserBalance = createAsyncThunk(
-  'auth/userRefreshBalance',
-  async (_, thunkAPI) => {
     try {
-      const { data } = await axios.get('/users/current');
-      return data;
+      setAuthHeader(persistedToken);
+      const response = await axios.get('/users/current');
+      return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );

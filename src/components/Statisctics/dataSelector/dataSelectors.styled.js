@@ -1,15 +1,16 @@
 import styled from 'styled-components';
 import Select from 'react-select';
 
-export const StyledSelector = styled(Select)`
-  font-size: 16px;
+export const StyledDateSelector = styled(Select)`
+  font-size: 18px;
   width: 280px;
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-    width: 160px;
+    width: 158px;
   }
   @media screen and (min-width: 1280px) {
-    width: 180px;
+    width: 181px;
   }
+
   .Select__control {
     background-color: transparent;
     height: 50px;
@@ -21,6 +22,10 @@ export const StyledSelector = styled(Select)`
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.6);
     background: rgba(74, 86, 226, 0.1);
+
+    :hover {
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
   }
 
   .Select__placeholder {
@@ -63,15 +68,7 @@ export const StyledSelector = styled(Select)`
   }
 
   .Select__menu-list {
-    height: 160px;
-
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: #bfb4dd;
-      border-radius: 12px;
-    }
+    height: 100%;
   }
 
   .css-t3ipsp-control {
@@ -90,5 +87,9 @@ export const StyledSelector = styled(Select)`
 
   .Select__dropdown-indicator {
     color: rgba(251, 251, 251, 1);
+
+    &:hover {
+      color: rgba(251, 251, 251, 1);
+    }
   }
 `;

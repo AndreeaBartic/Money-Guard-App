@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {
   persistStore,
-  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -9,29 +8,20 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-
 import { modalReducer } from './modal/modalSlice';
-
 import { PersistedCurrencyReducer } from './currencyReducer/currencySlice';
-import { authReducer } from './authReducers/slice'; // Updated import
+import { PersistedAuthReducer } from '../Redux/authReducers/slice';
 import balanceReducer from './balance/balanceSlice';
 import { PersistedTransactionReducer } from './transactions/transactionsSlice';
 
-const authPersistConfig = {
-  key: 'auth',
-  storage,
-  whitelist: ['token'],
-};
-
 export const store = configureStore({
   reducer: {
-    transactions: PersistedTransactionReducer,
+    auth: PersistedAuthReducer,
+    modal: modalReducer,
     currency: PersistedCurrencyReducer,
     balance: balanceReducer,
-    modal: modalReducer,
-    auth: persistReducer(authPersistConfig, authReducer),
-    // transactions: financeReducer,
+    transactions: PersistedTransactionReducer,
+
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
@@ -40,5 +30,4 @@ export const store = configureStore({
       },
     }),
 });
-
-export const persistStor = persistStore(store);
+export const peristor = persistStore(store);

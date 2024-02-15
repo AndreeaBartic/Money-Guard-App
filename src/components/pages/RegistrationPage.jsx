@@ -1,4 +1,4 @@
-// RegistrationPage.js
+
 import RegisterForm from '../../Auth/RegistrationPage/RegistrationForm';
 import {
   ContentContainer,

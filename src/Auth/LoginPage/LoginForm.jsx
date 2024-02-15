@@ -85,12 +85,11 @@ const LoginForm = () => {
         </LabelStyled>
 
         <CustomButton type="submit">Log In</CustomButton>
-        <CustomButton isNavLink to="/Money-Guard-App/register">
+        <CustomButton isNavLink to="/register">
           Register
         </CustomButton>
       </FormStyled>
     </Formik>
   );
 };
-
 export default LoginForm;

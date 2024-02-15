@@ -1,6 +1,8 @@
 import LoginForm from '../../Auth/LoginPage/LoginForm';
-import { ContentContainer, MainContainer } from '../../Auth/RegistrationPage/RegistrationForm.styled';
-
+import {
+  ContentContainer,
+  MainContainer,
+} from '../../Auth/RegistrationPage/RegistrationForm.styled';
 
 const Login = () => {
   return (

@@ -8,7 +8,7 @@ export const ProgressBarWrapper = styled.div`
   border-radius: 20px;
 `;
 
-export const ProgressBar = styled.div`
+export const Progress = styled.div`
   height: 100%;
   background: ${props => props.background || 'red'};
   width: ${props => (props.strength / 4) * 100}%;
