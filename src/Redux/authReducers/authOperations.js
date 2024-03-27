@@ -30,6 +30,7 @@ export const logIn = createAsyncThunk(
     try {
       const res = await axios.post('/api/auth/sign-in', credential);
       setAuthToken(res.data.token);
+      localStorage.setItem('authToken', res.data.token);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

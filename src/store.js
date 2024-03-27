@@ -10,9 +10,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-
 import { modalReducer } from './Redux/modal/modalSlice';
-
 import { PersistedCurrencyReducer } from './Redux/currencyReducer/currencySlice';
 import authReducer from './Redux/authReducers/authSlice';
 import balanceReducer from './Redux/balance/balanceSlice';

@@ -3,7 +3,6 @@ import { Loader } from '../Loader/Loader';
 import TransactionTable from '../TransactionTable/TransactionTable';
 import { Sidebar } from '../Sidebar/Sidebar';
 import { TransactionCard } from '../../components/pages/TransactionCardMobile/TransactionCard';
-
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import {

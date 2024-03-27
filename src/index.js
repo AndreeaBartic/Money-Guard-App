@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import AppRouter from './App/App';
+import App from './App/App';
 import GlobalStyles from './styles/GlobalStyles';
 import { Provider as ReduxProvider } from 'react-redux';
 import { store } from 'store';
@@ -17,7 +17,7 @@ root.render(
     <GlobalStyles />
     <ReduxProvider store={store}>
       <PersistGate loading={<p>Loading...</p>} persistor={persistor}>
-        <AppRouter />
+        <App />
       </PersistGate>
     </ReduxProvider>
   </React.StrictMode>
