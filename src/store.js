@@ -14,7 +14,7 @@ import storage from 'redux-persist/lib/storage';
 import { modalReducer } from './Redux/modal/modalSlice';
 
 import { PersistedCurrencyReducer } from './Redux/currencyReducer/currencySlice';
-import authReducer from './Redux/authReducers/slice';
+import authReducer from './Redux/authReducers/authSlice';
 import balanceReducer from './Redux/balance/balanceSlice';
 import { PersistedTransactionReducer } from './Redux/transactions/transactionsSlice';
 
