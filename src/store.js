@@ -11,12 +11,12 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { modalReducer } from './modal/modalSlice';
+import { modalReducer } from './Redux/modal/modalSlice';
 
-import { PersistedCurrencyReducer } from './currencyReducer/currencySlice';
-import authReducer from '../Redux/authReducers/slice';
-import balanceReducer from './balance/balanceSlice';
-import { PersistedTransactionReducer } from './transactions/transactionsSlice';
+import { PersistedCurrencyReducer } from './Redux/currencyReducer/currencySlice';
+import authReducer from './Redux/authReducers/slice';
+import balanceReducer from './Redux/balance/balanceSlice';
+import { PersistedTransactionReducer } from './Redux/transactions/transactionsSlice';
 
 const authPersistConfig = {
   key: 'auth',

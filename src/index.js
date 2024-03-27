@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+
 import AppRouter from './App/App';
 import GlobalStyles from './styles/GlobalStyles';
 import { Provider as ReduxProvider } from 'react-redux';
-import { store } from './Redux/store';
+import { store } from 'store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
+import 'index.css';
 
 let persistor = persistStore(store);
 

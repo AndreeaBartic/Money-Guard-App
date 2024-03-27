@@ -1,4 +1,5 @@
 import React, { lazy, Suspense } from 'react';
+
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
