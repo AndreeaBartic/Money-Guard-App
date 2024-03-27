@@ -14,7 +14,7 @@ import storage from 'redux-persist/lib/storage';
 import { modalReducer } from './modal/modalSlice';
 
 import { PersistedCurrencyReducer } from './currencyReducer/currencySlice';
-import authSlice from './authReducers/slice';
+import authReducer from './authReducers/slice';
 import balanceReducer from './balance/balanceSlice';
 import { PersistedTransactionReducer } from './transactions/transactionsSlice';
 
@@ -30,7 +30,7 @@ export const store = configureStore({
     currency: PersistedCurrencyReducer,
     balance: balanceReducer,
     modal: modalReducer,
-    auth: persistReducer(authPersistConfig, authSlice),
+    auth: persistReducer(authPersistConfig, authReducer),
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
