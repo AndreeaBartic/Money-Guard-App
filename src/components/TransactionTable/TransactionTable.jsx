@@ -70,7 +70,8 @@ const TransactionTable = () => {
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   const top5Transactions = sortedTransactions.slice(0, 5);
-
+  const categories = JSON.parse(localStorage.getItem('categories')) ?? [];
+  console.log(categories);
   return (
     <>
       <Container>
@@ -101,6 +102,9 @@ const TransactionTable = () => {
                     amount,
                     _id,
                   }) => {
+                    const category =
+                      categories.find(cat => cat.id === categoryId)?.name ||
+                      'Categorie necunoscută';
                     // let date = new Date(createdAt).toLocaleDateString();
                     let numberSign = '+';
                     let colorClassName = 'colorIncome';
@@ -115,7 +119,7 @@ const TransactionTable = () => {
                         {type === 'income' ? (
                           <TableData>Income</TableData>
                         ) : (
-                          <TableDataCategory>{categoryId}</TableDataCategory>
+                          <TableDataCategory>{category}</TableDataCategory>
                         )}
                         <TableDataComment>{comment}</TableDataComment>
 
