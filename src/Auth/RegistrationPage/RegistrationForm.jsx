@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { register } from '../../Redux/authReducers/operations';
+import { register } from '../../Redux/authReducers/authOperations';
 import * as Yup from 'yup';
 // import {
 //   Card,

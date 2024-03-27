@@ -20,7 +20,7 @@ import MoneyGuardLogo from '../../images/svg/logo.svg';
 import Logout from '../../components/Logout/Logout';
 import Modal from '../../components/Modal/Modal';
 import { toggleLogOutModal } from '../../Redux/modal/modalSlice';
-import { selectUser } from '../../Redux/authReducers/selectors';
+import { selectUser } from '../../Redux/authReducers/authSelectors';
 import {
   selectModalState,
   selectModalTypeState,
