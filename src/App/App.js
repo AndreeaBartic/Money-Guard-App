@@ -23,7 +23,7 @@ function AppRouter() {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route
-            path="register"
+            path="/register"
             element={
               <PublicRoute
                 redirectTo="/home"
@@ -32,7 +32,7 @@ function AppRouter() {
             }
           />
           <Route
-            path="login"
+            path="/login"
             element={
               <PublicRoute redirectTo="/home" component={<LoginPage />} />
             }

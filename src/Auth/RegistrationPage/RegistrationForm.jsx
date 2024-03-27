@@ -87,7 +87,7 @@ export const RegisterForm = () => {
           toast.error('Access Forbidden: User with such email already exists');
         } else {
           toast.success('Successfully logged in!');
-          navigate('Money-Guard-App/home');
+          navigate('/home');
         }
       } catch (error) {
         toast.error('An error occurred: ' + error.message);

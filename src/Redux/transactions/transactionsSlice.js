@@ -15,6 +15,15 @@ export const transactionSlice = createSlice({
     transactions: [],
     isLoading: false,
     error: null,
+    categories: [],
+  },
+  reducers: {
+    setSelectedCategory: (state, action) => {
+      state.categories = action.payload;
+    },
+    clearSelectedCategory: state => {
+      state.value = null;
+    },
   },
   extraReducers: builder =>
     builder
@@ -36,6 +45,9 @@ export const transactionSlice = createSlice({
       .addCase(deleteItem.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
+        state.transactions = state.transactions.filter(
+          item => item._id !== action.meta.arg
+        );
       })
       .addCase(deleteItem.rejected, (state, action) => {
         state.isLoading = false;
@@ -76,7 +88,7 @@ export const transactionSlice = createSlice({
 const persistConfig = {
   key: 'transactions',
   storage,
-  whitelist: ['data', 'transactions'],
+  whitelist: ['value', 'transactions'],
 };
 
 const transactionReducer = transactionSlice.reducer;
@@ -84,3 +96,4 @@ export const PersistedTransactionReducer = persistReducer(
   persistConfig,
   transactionReducer
 );
+export const { setSelectedCategory } = transactionSlice.actions;

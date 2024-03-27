@@ -24,13 +24,14 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { forwardRef, useState, useEffect } from 'react';
 import axios from 'axios';
 
-const addSchema = object({
+const transactionSchema = object({
   amount: number().positive().required('Amount is required'),
   comment: string()
     .max(30, 'Maximum must be 30 characters')
     .required('Please fill in comment'),
   categoryId: string().min(3),
 });
+
 const initialValues = {
   type: 'EXPENSE',
   categoryId: '',
@@ -57,8 +58,8 @@ function FormAddTransaction({ onClose }) {
     const getCategories = async () => {
       try {
         const response = await axios.get(`/api/transaction-categories`);
-
         setCategories(response.data);
+        return response.data;
       } catch (error) {
         return error.message;
       }
@@ -70,14 +71,13 @@ function FormAddTransaction({ onClose }) {
 
     localStorage.setItem('categories', JSON.stringify(categories));
   });
-  console.log(categories);
+
   const optionCategories = categories.map(category => {
     return {
       value: category.id,
       label: category.name,
     };
   });
-  console.log(categories);
 
   const handleSubmit = (values, { resetForm }) => {
     console.log(values);
@@ -97,7 +97,7 @@ function FormAddTransaction({ onClose }) {
       <AddTitle>Add transaction</AddTitle>
       <Formik
         initialValues={initialValues}
-        validationSchema={addSchema}
+        validationSchema={transactionSchema}
         onSubmit={handleSubmit}
       >
         {formikProps => {
@@ -124,9 +124,8 @@ function FormAddTransaction({ onClose }) {
                 <>
                   <CustomSelect
                     options={optionCategories}
-                    value={values.categoryId}
+                    value={values}
                     onChange={option => {
-                      console.log('Selected category:', option);
                       setFieldValue('categoryId', option);
                     }}
                     className="Select"

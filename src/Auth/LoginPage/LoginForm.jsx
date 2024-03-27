@@ -32,21 +32,20 @@ const LoginForm = () => {
       email: values.email.trim(),
       password: values.password.trim(),
     };
-
-    const result = await dispatch(logIn(formData));
-    if (result.error) {
-      toast.error('Login failed. Please check your credentials.', {
-        autoClose: 1200,
-      });
-    } else {
+    try {
+      await dispatch(logIn(formData));
       toast.success(`You have successfully logged in ${name}.`, {
         autoClose: 1200,
       });
-      navigate('/Money-Guard-App/home');
+
+      navigate('/home');
       resetForm();
+    } catch (error) {
+      toast.error('Login failed. Please check your credentials.', {
+        autoClose: 1200,
+      });
     }
   };
-
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
@@ -88,12 +87,11 @@ const LoginForm = () => {
         </LabelStyled>
 
         <CustomButton type="submit">Log In</CustomButton>
-        <CustomButton isNavLink to="/Money-Guard-App/register">
+        <CustomButton isNavLink to="/register">
           Register
         </CustomButton>
       </FormStyled>
     </Formik>
   );
 };
-
 export default LoginForm;

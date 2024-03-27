@@ -64,6 +64,7 @@ const TransactionTable = () => {
   const allTransactions = useSelector(
     state => state[transactionSlice.name].transactions
   );
+  console.log(allTransactions);
   const sortedTransactions = allTransactions
     .slice()
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -114,9 +115,7 @@ const TransactionTable = () => {
                         {type === 'income' ? (
                           <TableData>Income</TableData>
                         ) : (
-                          <TableDataCategory>
-                            {categoryId.name}
-                          </TableDataCategory>
+                          <TableDataCategory>{categoryId}</TableDataCategory>
                         )}
                         <TableDataComment>{comment}</TableDataComment>
 
