@@ -54,11 +54,13 @@ function FormAddTransaction({ onClose }) {
   const [categories, setCategories] = useState(
     () => JSON.parse(window.localStorage.getItem('categories')) ?? []
   );
+
   useEffect(() => {
     const getCategories = async () => {
       try {
         const response = await axios.get(`/api/transaction-categories`);
         setCategories(response.data);
+        localStorage.setItem('categories', JSON.stringify(response.data));
         return response.data;
       } catch (error) {
         return error.message;
@@ -68,8 +70,6 @@ function FormAddTransaction({ onClose }) {
     if (categories.length === 0) {
       getCategories();
     }
-
-    localStorage.setItem('categories', JSON.stringify(categories));
   });
 
   const optionCategories = categories.map(category => {
