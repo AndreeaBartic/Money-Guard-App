@@ -55,5 +55,3 @@ export const Background = styled.div`
     background: url(${backDes});
   }
 `;
-
-export const NavBlockWrapper = styled.div``;
