@@ -199,7 +199,7 @@ export const RegisterForm = () => {
               'weak',
               'insecure',
               'secure',
-              'god password',
+              'good password',
             ]}
             barColors={['#ff868d', '#ffc727', '#9e40ba', '#7000ff', 'green']}
             password={formik.values.password}

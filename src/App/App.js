@@ -5,7 +5,11 @@ import { BrowserRouter } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { ProtectedRoute } from '../components/Router/ProtectedRoute';
 import { PublicRoute } from '../components/Router/PublicRoute';
+import { DesignContainer } from '../components/DesignContainer/DesignContainer';
 
+// const DesignContainer = lazy(() =>
+//   import('../components/DesignContainer/DesignContainer')
+// );
 const Home = lazy(() => import('../components/pages/Home'));
 const RegistrationPage = lazy(() =>
   import('../components/pages/RegistrationPage')
@@ -14,9 +18,7 @@ const LoginPage = lazy(() => import('../components/pages/LoginPage'));
 // const CurrencyPage = lazy(() =>
 //   import('../components/pages/CurrencyMob/CurrencyMobile')
 // );
-// const StatisticsTab = lazy(() =>
-//   import('../components/pages/StatisticsTab/StatisticsTab')
-// );
+const StatisticsPage = lazy(() => import('../components/pages/StatisticsPage'));
 
 function AppRouter() {
   return (
@@ -44,15 +46,24 @@ function AppRouter() {
               <PublicRoute redirectTo="/home" component={<LoginPage />} />
             }
           />
-          <Route
-            path="/home"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-
+          <Route element={<DesignContainer />}>
+            <Route
+              path="/home"
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/statistics"
+              element={
+                <ProtectedRoute>
+                  <StatisticsPage />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
           <Route
             path="*"
             element={<Navigate to="/Money-Guard-App" replace={true} />}
