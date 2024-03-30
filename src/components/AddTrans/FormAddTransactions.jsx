@@ -1,6 +1,6 @@
 import { Formik, Field } from 'formik';
 import 'react-datepicker/dist/react-datepicker.css';
-import { object, string, number } from 'yup';
+import { object, string, number, date } from 'yup';
 import {
   AddBtn,
   AddTitle,
@@ -25,15 +25,30 @@ import { forwardRef, useState, useEffect } from 'react';
 import axios from 'axios';
 
 const transactionSchema = object({
-  amount: number().positive().required('Amount is required'),
-  comment: string()
-    .max(30, 'Maximum must be 30 characters')
-    .required('Please fill in comment'),
-  categoryId: string().min(3),
+  type: string()
+    .required('Type is required')
+    .oneOf(['EXPENSE', 'INCOME'], 'Amount must be either INCOME or EXPENSE'),
+  amount: number()
+    .required('Amount is required')
+    .test(
+      'amount-sign',
+      'Amount must be positive for INCOME and negative for EXPENSE',
+      function (value) {
+        const { type } = this.parent;
+        return (
+          (type === 'INCOME' && value >= 0) || (type === 'EXPENSE' && value < 0)
+        );
+      }
+    ),
+  transactionDate: date()
+    .required('Transaction date is required')
+    .max(new Date(), 'Transaction date cannot be in the future'),
+  comment: string().required('Comment is required'),
+  categoryId: string().required('Category is required'),
 });
 
 const initialValues = {
-  type: 'EXPENSE',
+  type: 'INCOME',
   categoryId: '',
   amount: 0,
   transactionDate: new Date(),
@@ -80,15 +95,10 @@ function FormAddTransaction({ onClose }) {
   });
 
   const handleSubmit = (values, { resetForm }) => {
+    console.log('clicked');
     console.log(values);
-    const adjustedValues = {
-      ...values,
-      amount:
-        values.type === 'EXPENSE'
-          ? -Math.abs(values.amount)
-          : Math.abs(values.amount),
-    };
-    dispatch(addTransaction(adjustedValues));
+
+    dispatch(addTransaction(values));
     resetForm();
   };
 
