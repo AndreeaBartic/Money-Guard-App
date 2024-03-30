@@ -64,14 +64,14 @@ const TransactionTable = () => {
   const allTransactions = useSelector(
     state => state[transactionSlice.name].transactions
   );
-  console.log(allTransactions);
+  // console.log(allTransactions);
   const sortedTransactions = allTransactions
     .slice()
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-  const top5Transactions = sortedTransactions.slice(0, 5);
+  const top5Transactions = sortedTransactions;
   const categories = JSON.parse(localStorage.getItem('categories')) ?? [];
-  console.log(categories);
+  // console.log(categories);
   return (
     <>
       <Container>
@@ -100,23 +100,24 @@ const TransactionTable = () => {
                     categoryId,
                     comment,
                     amount,
-                    _id,
+                    id,
                   }) => {
+                    // console.log(top5Transactions);
                     const category =
                       categories.find(cat => cat.id === categoryId)?.name ||
                       'Categorie necunoscută';
                     // let date = new Date(createdAt).toLocaleDateString();
                     let numberSign = '+';
                     let colorClassName = 'colorIncome';
-                    if (type === 'expense') {
+                    if (type === 'EXPENSE') {
                       numberSign = '-';
                       colorClassName = 'colorExpense';
                     }
                     return (
-                      <TableRow key={_id} className="data">
+                      <TableRow key={id} className="data">
                         <TableDataDate>{transactionDate}</TableDataDate>
                         <TableDataType>{numberSign}</TableDataType>
-                        {type === 'income' ? (
+                        {type === 'INCOME' ? (
                           <TableData>Income</TableData>
                         ) : (
                           <TableDataCategory>{category}</TableDataCategory>
@@ -127,12 +128,12 @@ const TransactionTable = () => {
                           {amount}
                         </TableDataColor>
                         <PencilButton>
-                          <BiPencil onClick={() => handleEditClick(_id)} />
+                          <BiPencil onClick={() => handleEditClick(id)} />
                           <CustomButton
                             style={{}}
                             className="deleteItem"
                             onClick={() => {
-                              deleteTransactions(_id);
+                              deleteTransactions(id);
                             }}
                           >
                             Delete

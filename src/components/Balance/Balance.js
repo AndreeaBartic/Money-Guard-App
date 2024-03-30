@@ -13,9 +13,9 @@ export const Balance = () => {
   useEffect(() => {
     const totalSum = transactions.reduce((sumValue, transaction) => {
       let numberValue = parseFloat(transaction.value);
-      let numberSign = 1;
-      if (transaction.type === 'expense') {
-        numberSign = -1;
+      let numberSign = -1;
+      if (transaction.type === 'INCOME') {
+        numberSign = 1;
       }
       return sumValue + numberSign * numberValue;
     }, 0);

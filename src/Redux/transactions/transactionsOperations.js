@@ -2,13 +2,13 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-axios.defaults.baseURL = 'https://wallet.b.goit.study/';
+axios.defaults.baseURL = 'https://wallet.b.goit.study';
 
 export const fetchTransactions = createAsyncThunk(
   'transactions/fetchAll',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get('/transactions');
+      const response = await axios.get('/api/transactions');
       const data = response.data;
       localStorage.setItem('transactions', JSON.stringify(data));
       return data;
@@ -21,7 +21,7 @@ export const deleteItem = createAsyncThunk(
   'transactions/deleteItem',
   async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.delete(`/transactions/${id}`);
+      const response = await axios.delete(`/api/transactions/${id}`);
       return response.data;
     } catch (e) {
       return rejectWithValue(e.message);
@@ -32,8 +32,8 @@ export const addTransaction = createAsyncThunk(
   'transactions/addTransaction',
   async (data, { rejectWithValue }) => {
     try {
-      if (data.type === 'income') {
-        const { category, ...incomeData } = data;
+      if (data.type === 'INCOME') {
+        const { categoryId, ...incomeData } = data;
         const response = await axios.post('/api/transactions', incomeData);
         return response.data;
       } else {
@@ -51,12 +51,15 @@ export const editItem = createAsyncThunk(
   'transactions/editItem',
   async ({ id, values }, thunkAPI) => {
     try {
-      if (values.type === 'income') {
+      if (values.type === 'INCOME') {
         const { category, ...changedData } = values;
-        const response = await axios.put(`/transactions/${id}`, changedData);
+        const response = await axios.put(
+          `/api/transactions/${id}`,
+          changedData
+        );
         return response.data;
       } else {
-        const response = await axios.put(`/transactions/${id}`, values);
+        const response = await axios.put(`/api/transactions/${id}`, values);
         return response.data;
       }
     } catch (e) {
