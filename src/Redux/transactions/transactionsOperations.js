@@ -32,7 +32,7 @@ export const addTransaction = createAsyncThunk(
   'transactions/addTransaction',
   async (data, { rejectWithValue }) => {
     try {
-      if (data.type === 'INCOME') {
+      if (data.type === 'income') {
         const { categoryId, ...incomeData } = data;
         const response = await axios.post('/api/transactions', incomeData);
         return response.data;
@@ -51,7 +51,7 @@ export const editItem = createAsyncThunk(
   'transactions/editItem',
   async ({ id, values }, thunkAPI) => {
     try {
-      if (values.type === 'INCOME') {
+      if (values.type === 'income') {
         const { category, ...changedData } = values;
         const response = await axios.put(
           `/api/transactions/${id}`,

@@ -11,15 +11,13 @@ export const Balance = () => {
   const balance = useSelector(selectorBalance);
 
   useEffect(() => {
-    const totalSum = transactions.reduce((sumValue, transaction) => {
-      let numberValue = parseFloat(transaction.value);
-      let numberSign = -1;
-      if (transaction.type === 'INCOME') {
-        numberSign = 1;
-      }
-      return sumValue + numberSign * numberValue;
+    // Calculate total balance
+    const totalBalance = transactions.reduce((total, transaction) => {
+      return total + transaction.amount;
     }, 0);
-    dispatch(setBalance(totalSum));
+
+    // Dispatch action to update balance in the Redux store
+    dispatch(setBalance(totalBalance));
   }, [dispatch, transactions]);
 
   return (
