@@ -3,7 +3,7 @@ import { RiEmotionUnhappyLine } from 'react-icons/ri';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { TextInfo, Total, TotalContainer } from './Chart.styled';
-// import { useTransaction } from 'utils/useTransaction';
+import { useTransaction } from 'utils/useTransaction';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -20,14 +20,6 @@ export const colorStatistics = [
   { name: 'Entertainment', color: '#FF69B4' },
   { name: 'Income', color: '#FFB627' },
 ];
-const useTransaction = () => {
-  const income = 1000;
-  const summary = 500;
-  return {
-    income,
-    summary,
-  };
-};
 
 const ChartComponent = ({ transactions }) => {
   const { income, summary } = useTransaction();

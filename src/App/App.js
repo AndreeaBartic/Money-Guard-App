@@ -7,19 +7,15 @@ import { PublicRoute } from '../components/Router/PublicRoute';
 import { DesignContainer } from '../components/DesignContainer/DesignContainer';
 import { setAuthToken } from '../Redux/authReducers/authOperations';
 
-
-// const DesignContainer = lazy(() =>
-//   import('../components/DesignContainer/DesignContainer')
-// );
 const Home = lazy(() => import('../components/pages/Home'));
 const RegistrationPage = lazy(() =>
   import('../components/pages/RegistrationPage')
 );
 const LoginPage = lazy(() => import('../components/pages/LoginPage'));
 
-// const CurrencyPage = lazy(() =>
-//   import('../components/pages/CurrencyMob/CurrencyMobile')
-// );
+const CurrencyPage = lazy(() =>
+  import('../components/pages/CurrencyMob/CurrencyMobile')
+);
 const StatisticsPage = lazy(() => import('../components/pages/StatisticsPage'));
 
 function App() {
