@@ -13,9 +13,9 @@ const RegistrationPage = lazy(() =>
 );
 const LoginPage = lazy(() => import('../components/pages/LoginPage'));
 
-const CurrencyPage = lazy(() =>
-  import('../components/pages/CurrencyMob/CurrencyMobile')
-);
+// const CurrencyPage = lazy(() =>
+//   import('../components/pages/CurrencyMob/CurrencyMobile')
+// );
 const StatisticsPage = lazy(() => import('../components/pages/StatisticsPage'));
 
 function App() {
