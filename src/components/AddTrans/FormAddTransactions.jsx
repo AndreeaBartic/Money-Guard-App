@@ -95,7 +95,7 @@ function FormAddTransaction({ onClose }) {
   });
 
   const handleSubmit = (values, { resetForm }) => {
-    const defaultIncomeCategoryId = 'c9d9e447-1b83-4238-8712-edc77b18b739';
+    const defaultIncomeCategoryId = '063f1132-ba5d-42b4-951d-44011ca46262';
     const payload = {
       ...values,
       categoryId:
