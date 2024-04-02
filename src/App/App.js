@@ -7,10 +7,6 @@ import { PublicRoute } from '../components/Router/PublicRoute';
 import { DesignContainer } from '../components/DesignContainer/DesignContainer';
 import { setAuthToken } from '../Redux/authReducers/authOperations';
 
-
-// const DesignContainer = lazy(() =>
-//   import('../components/DesignContainer/DesignContainer')
-// );
 const Home = lazy(() => import('../components/pages/Home'));
 const RegistrationPage = lazy(() =>
   import('../components/pages/RegistrationPage')
