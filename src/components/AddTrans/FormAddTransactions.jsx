@@ -44,11 +44,11 @@ const transactionSchema = object({
     .required('Transaction date is required')
     .max(new Date(), 'Transaction date cannot be in the future'),
   comment: string().required('Comment is required'),
-  categoryId: string(),
+  categoryId: string().required(),
 });
 
 const initialValues = {
-  type: 'INCOME',
+  type: 'EXPENSE',
   categoryId: '',
   amount: 0,
   transactionDate: new Date(),
@@ -95,7 +95,9 @@ function FormAddTransaction({ onClose }) {
   });
 
   const handleSubmit = (values, { resetForm }) => {
-    const defaultIncomeCategoryId = '063f1132-ba5d-42b4-951d-44011ca46262';
+
+    const defaultIncomeCategoryId = '3caa7ba0-79c0-40b9-ae1f-de1af1f6e386';
+
     const payload = {
       ...values,
       categoryId:

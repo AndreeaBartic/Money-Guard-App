@@ -37,7 +37,7 @@ const LoginForm = () => {
       toast.success(`You have successfully logged in ${name}.`, {
         autoClose: 1200,
       });
-      console.log(formData);
+
       navigate('/home');
       resetForm();
     } catch (error) {
