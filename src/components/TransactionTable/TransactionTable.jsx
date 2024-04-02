@@ -15,8 +15,6 @@ import {
   TableDataColor,
   PencilButton,
   CustomButton,
-
-  // AddButton,
 } from './TransactionTable.styled';
 import { selectIsLoading } from '../../Redux/transactions/transactionsSelectors';
 import Modal from '../../components/Modal/Modal';
@@ -168,95 +166,8 @@ const TransactionTable = () => {
           <Modal children={<Logout />} showCloseIcon={false} />
         )}
       </Container>
-      <PencilButton>
-        <BiPencil onClick={() => handleEditClick()} />
-        Edit
-      </PencilButton>
     </>
   );
 };
 
 export default TransactionTable;
-
-// import {
-//   ContainerHeader,
-//   TableStyle,
-//   WrapperButtons,
-//   ButtonDelete,
-//   PencilEdit,
-//   Pencil,
-//   // TransactionWrapper,
-// } from './TransactionTable.styled';
-
-// const formatDate = date => {
-//   const d = new Date(date);
-//   const day = d.getDate().toString().padStart(2, '0');
-//   const month = (d.getMonth() + 1).toString().padStart(2, '0');
-//   const year = d.getFullYear();
-//   return `${day}.${month}.${year}`;
-// };
-
-// export const TransactionTable = ({
-//   transactions,
-//   handleEditClick,
-//   deleteTransactions,
-// }) => {
-//   return (
-//     <ContainerHeader>
-//       <TableStyle>
-//         <thead>
-//           <tr>
-//             <th>Date</th>
-//             <th>Type</th>
-//             <th>Category</th>
-//             <th>Comment</th>
-//             <th>Sum</th>
-//             <th></th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {transactions?.map(
-//             ({ createdAt, type, category, comment, value, _id }) => {
-//               let date = new Date(createdAt).toLocaleDateString();
-//               let numberSign = '+';
-//               let colorClassName = 'colorIncome';
-//               if (type === 'expense') {
-//                 numberSign = '-';
-//                 colorClassName = 'colorExpense';
-//               }
-
-//               return (
-//                 <tr key={_id} type={type}>
-//                   <td>{date}</td>
-//                   <td>{type}</td>
-//                   <td>{type === 'income' ? 'Income' : category}</td>
-//                   <td>{comment}</td>
-//                   <td>
-//                     {numberSign}
-//                     {value}
-//                   </td>
-//                   <td>
-//                     <WrapperButtons>
-//                       <ButtonDelete
-//                         onClick={() => {
-//                           deleteTransactions(_id);
-//                         }}
-//                       >
-//                         Delete
-//                       </ButtonDelete>
-
-//                       <PencilEdit>
-//                         <Pencil onClick={() => handleEditClick(_id)} />
-//                         Edit
-//                       </PencilEdit>
-//                     </WrapperButtons>
-//                   </td>
-//                 </tr>
-//               );
-//             }
-//           )}
-//         </tbody>
-//       </TableStyle>
-//     </ContainerHeader>
-//   );
-// };

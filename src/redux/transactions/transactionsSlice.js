@@ -16,6 +16,18 @@ export const transactionSlice = createSlice({
     isLoading: false,
     error: null,
     categories: [],
+    categoriesSummary: [
+      {
+        name: '',
+        type: '',
+        total: 0,
+      },
+    ],
+    incomeSummary: 0,
+    expenseSummary: 0,
+    periodTotal: 0,
+    year: 0,
+    month: 0,
   },
   reducers: {
     setSelectedCategory: (state, action) => {
