@@ -7,6 +7,7 @@ import {
   deleteItem,
   editItem,
   addTransaction,
+  fetchCategories,
 } from './transactionsOperations';
 
 export const transactionSlice = createSlice({
@@ -92,6 +93,15 @@ export const transactionSlice = createSlice({
         }
       })
       .addCase(editItem.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+
+      .addCase(fetchCategories.fulfilled, (state, action) => {
+        state.categories = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(fetchCategories.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       }),
