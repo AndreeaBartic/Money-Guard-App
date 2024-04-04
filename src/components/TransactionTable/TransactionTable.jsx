@@ -60,7 +60,7 @@ const TransactionTable = () => {
   useEffect(() => {
     dispatch(fetchTransactions());
     dispatch(fetchCategories());
-  }, [fetchTransactions, fetchCategories]);
+  }, [dispatch, fetchTransactions, fetchCategories]);
 
   const allTransactions = useSelector(
     state => state[transactionSlice.name].transactions
