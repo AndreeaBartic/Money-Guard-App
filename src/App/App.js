@@ -1,6 +1,5 @@
 import React, { lazy, Suspense, useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { ProtectedRoute } from '../components/Router/ProtectedRoute';
 import { PublicRoute } from '../components/Router/PublicRoute';
@@ -13,9 +12,9 @@ const RegistrationPage = lazy(() =>
 );
 const LoginPage = lazy(() => import('../components/pages/LoginPage'));
 
-// const CurrencyPage = lazy(() =>
-//   import('../components/pages/CurrencyMob/CurrencyMobile')
-// );
+const CurrencyPage = lazy(() =>
+  import('../components/pages/CurrencyMob/CurrencyMobile')
+);
 const StatisticsPage = lazy(() => import('../components/pages/StatisticsPage'));
 
 function App() {
@@ -68,20 +67,20 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="currency"
+              element={
+                <ProtectedRoute redirectTo="/login">
+                  <CurrencyPage />
+                </ProtectedRoute>
+              }
+            />
           </Route>
+
           <Route
             path="*"
             element={<Navigate to="/Money-Guard-App" replace={true} />}
           />
-          <Route
-            path="/home"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-
           <Route path="*" element={<Navigate to="/" replace={true} />} />
         </Routes>
       </Suspense>

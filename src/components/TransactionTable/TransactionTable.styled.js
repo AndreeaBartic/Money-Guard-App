@@ -107,6 +107,8 @@ export const PencilButton = styled.div`
 
 export const CustomButton = styled.div`
   height: 29px;
+  color: var(--white);
+
   display: flex;
   padding: 4px 12px;
   align-items: center;
