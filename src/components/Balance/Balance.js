@@ -11,12 +11,10 @@ export const Balance = () => {
   const balance = useSelector(selectorBalance);
 
   useEffect(() => {
-    // Calculate total balance
     const totalBalance = transactions.reduce((total, transaction) => {
       return total + transaction.amount;
     }, 0);
 
-    // Dispatch action to update balance in the Redux store
     dispatch(setBalance(totalBalance));
   }, [dispatch, transactions]);
 
