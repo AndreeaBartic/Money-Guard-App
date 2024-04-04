@@ -1,8 +1,9 @@
+import React from 'react';
 import { CustomButton } from '../../components/common/CustomButton';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { logIn } from '../../Redux/authReducers/authOperations';
-import { Formik } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
 import Logotip from '../../images/svg/logo.svg';
 import {
   EmailIcon,
@@ -26,71 +27,84 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async (values, { resetForm }) => {
-    const name = values.email.split('@')[0];
-    const formData = {
-      email: values.email.trim(),
-      password: values.password.trim(),
-    };
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      await dispatch(logIn(formData));
-      toast.success(`You have successfully logged in ${name}.`, {
-        autoClose: 1200,
-      });
-
+      await ValidationSchema.validate(values, { abortEarly: false });
+      const name = values.email.split('@')[0];
+      const formData = {
+        email: values.email.trim(),
+        password: values.password.trim(),
+      };
+      const result = await dispatch(logIn(formData));
+      if (result.error) {
+        toast.error('Login failed. Please check your credentials.', {
+          autoClose: 1200,
+        });
+      } else {
+        toast.success(`You have successfully logged in ${name}.`, {
+          autoClose: 1200,
+        });
+        resetForm();
+      }
       navigate('/home');
       resetForm();
     } catch (error) {
       toast.error('Login failed. Please check your credentials.', {
-        autoClose: 1200,
+        autoClose: 3000,
       });
     }
+    setSubmitting(false);
   };
+
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
       validationSchema={ValidationSchema}
       onSubmit={handleSubmit}
     >
-      <FormStyled>
-        <LogotipStyled>
-          <img
-            src={Logotip}
-            alt="Logo MoneyGuard"
-            width="36px"
-            height="36px"
-            draggable="false"
-          />
-          <h3>MoneyGuard</h3>
-        </LogotipStyled>
-
-        <LabelStyled>
-          <IconInInput>
-            <IconContainer>
-              <EmailIcon />
-            </IconContainer>
-            <InputStyled name="email" type="email" placeholder="E-mail" />
-          </IconInInput>
-        </LabelStyled>
-
-        <LabelStyled>
-          <IconInInput>
-            <IconContainer>
-              <PasswordIcon />
-            </IconContainer>
-            <InputStyled
-              name="password"
-              type="password"
-              placeholder="Password"
+      {({ handleSubmit }) => (
+        <FormStyled onSubmit={handleSubmit}>
+          <LogotipStyled>
+            <img
+              src={Logotip}
+              alt="Logo MoneyGuard"
+              width="36px"
+              height="36px"
+              draggable="false"
             />
-          </IconInInput>
-        </LabelStyled>
+            <h3>MoneyGuard</h3>
+          </LogotipStyled>
 
-        <CustomButton type="submit">Log In</CustomButton>
-        <CustomButton isNavLink to="/register">
-          Register
-        </CustomButton>
-      </FormStyled>
+          <LabelStyled>
+            <IconInInput>
+              <IconContainer>
+                <EmailIcon />
+              </IconContainer>
+              <InputStyled name="email" type="email" placeholder="E-mail" />
+            </IconInInput>
+            <ErrorMessage name="email" component="div" />
+          </LabelStyled>
+
+          <LabelStyled>
+            <IconInInput>
+              <IconContainer>
+                <PasswordIcon />
+              </IconContainer>
+              <InputStyled
+                name="password"
+                type="password"
+                placeholder="Password"
+              />
+            </IconInInput>
+            <ErrorMessage name="password" component="div" />
+          </LabelStyled>
+
+          <CustomButton type="submit">Log In</CustomButton>
+          <CustomButton isNavLink to="/register">
+            Register
+          </CustomButton>
+        </FormStyled>
+      )}
     </Formik>
   );
 };
