@@ -22,6 +22,8 @@ import { selectIsLoading } from '../../Redux/transactions/transactionsSelectors'
 import { RotatingLines } from 'react-loader-spinner';
 import { TransactionCard } from '../pages/TransactionCardMobile/TransactionCard';
 import { transactionSlice } from '../../Redux/transactions/transactionsSlice';
+import { fetchCategories } from '../../Redux/transactions/transactionsOperations';
+
 import { ScrollToTopButton } from '../pages/ScrollToTopButton/ScrollToTopButton';
 import EditTrans from './EditTrans';
 
@@ -43,6 +45,7 @@ const TransactionTable = () => {
 
   useEffect(() => {
     dispatch(fetchTransactions());
+    dispatch(fetchCategories());
   }, [dispatch, fetchTransactions]);
 
   const allTransactions = useSelector(
@@ -54,8 +57,10 @@ const TransactionTable = () => {
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   const top5Transactions = sortedTransactions;
-  const categories = JSON.parse(localStorage.getItem('categories')) ?? [];
-  // console.log(categories);
+  const categories = useSelector(
+    state => state[transactionSlice.name].categories
+  );
+
   return (
     <>
       <Container>
@@ -76,7 +81,7 @@ const TransactionTable = () => {
                   </div>
                 </TableRow>
               ) : (
-                top5Transactions.map(
+                allTransactions.map(
                   ({
                     transactionDate,
                     type,
@@ -85,6 +90,7 @@ const TransactionTable = () => {
                     amount,
                     id,
                   }) => {
+
                     const transactionData = {
                       transactionDate,
                       type,
@@ -96,13 +102,13 @@ const TransactionTable = () => {
                     const category =
                       categories.find(cat => cat.id === categoryId)?.name ||
                       'Categorie necunoscută';
-
                     let numberSign = '+';
                     let colorClassName = 'colorIncome';
                     if (type === 'EXPENSE') {
                       numberSign = '-';
                       colorClassName = 'colorExpense';
                     }
+
                     return (
                       <TableRow key={id} className="data">
                         <TableDataDate>{transactionDate}</TableDataDate>
@@ -110,7 +116,11 @@ const TransactionTable = () => {
                         {type === 'INCOME' ? (
                           <TableData>Income</TableData>
                         ) : (
-                          <TableDataCategory>{category}</TableDataCategory>
+                          <TableDataCategory>
+                            {categories.find(
+                              category => category.id === categoryId
+                            )?.name || 'Uncategorized'}
+                          </TableDataCategory>
                         )}
                         <TableDataComment>{comment}</TableDataComment>
 
@@ -142,7 +152,8 @@ const TransactionTable = () => {
             <ScrollToTopButton />
             <TransactionCard
               transactions={top5Transactions}
-              // handleEditClick={handleEditClick}
+              categories={categories}
+              handleEditClick={handleEditClick}
               deleteTransactions={deleteTransactions}
             />
           </>

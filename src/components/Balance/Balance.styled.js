@@ -10,8 +10,8 @@ export const BalanceStyled = styled.div`
   max-width: 280px;
 
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-    min-width: 336px;
-    margin: 28px 32px 0;
+    min-width: 200px;
+    margin: 28px 32px;
   }
 
   @media screen and (min-width: 1280px) {

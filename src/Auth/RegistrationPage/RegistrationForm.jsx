@@ -2,16 +2,7 @@ import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { register } from '../../Redux/authReducers/authOperations';
 import * as Yup from 'yup';
-// import {
-//   Card,
-//   InputWrapper,
-//   InputRegister,
-//   TitleRegisters,
-//   LogoWrapper,
-//   FormRegister,
-//   ErrorRegister,
-//   IconWrapper,
-// } from '../../Auth/LoginPage/LoginForm.styled';
+
 import { ReactComponent as UserIcon } from '../../images/svg/form-user.svg';
 import { ReactComponent as EmailIcon } from '../../images/svg/form-email.svg';
 import { ReactComponent as LockIcon } from '../../images/svg/form-password.svg';
@@ -21,20 +12,10 @@ import { ReactComponent as CloseShield } from '../../images/svg/close.shield.svg
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { CustomButton } from '../../components/common/CustomButton';
-// import Logotip from '../../images/svg/logo.svg';
 import {
-  // EmailIcon,
-  // ErrorContainer,
-  // ErrorMessageStyled,
-  // FormStyled,
-  // IconContainer,
-  // InputStyled,
-  // LabelStyled,
-  // PasswordIcon,
   Card,
   InputWrapper,
   InputRegister,

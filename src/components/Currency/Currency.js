@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Wrap, StyledTable } from './Currency.styled';
+import { Wrap, StyledTable, Graphics, Line } from './Currency.styled';
 import { selectCurrency } from '../../Redux/currencyReducer/currencySelectors';
 import { fetchCurrency } from '../../Redux/currencyReducer/currencyOperations';
 import { useDispatch, useSelector } from 'react-redux';
@@ -49,6 +49,15 @@ export const Currency = () => {
               </tr>
             </tbody>
           </StyledTable>
+          <Graphics>
+            <span className="currency-value">
+              {currency && currency.USD && currency.USD.buy.toFixed(2)}
+            </span>
+            <span className="currency-value">
+              {currency && currency.EUR && currency.EUR.buy.toFixed(2)}
+            </span>
+          </Graphics>
+          <Line />
         </Wrap>
       )}
     </div>
