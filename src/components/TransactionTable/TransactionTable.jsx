@@ -90,7 +90,6 @@ const TransactionTable = () => {
                     amount,
                     id,
                   }) => {
-
                     const transactionData = {
                       transactionDate,
                       type,
@@ -99,9 +98,7 @@ const TransactionTable = () => {
                       amount,
                       id,
                     };
-                    const category =
-                      categories.find(cat => cat.id === categoryId)?.name ||
-                      'Categorie necunoscută';
+
                     let numberSign = '+';
                     let colorClassName = 'colorIncome';
                     if (type === 'EXPENSE') {
@@ -153,21 +150,10 @@ const TransactionTable = () => {
             <TransactionCard
               transactions={top5Transactions}
               categories={categories}
-              handleEditClick={handleEditClick}
               deleteTransactions={deleteTransactions}
             />
           </>
         )}
-
-        {/* {modalType === 'modal/toggleAddModal' && isModalOpen && (
-          <Modal children={<AddTransaction />} />
-        )}
-        {modalType === 'modal/toggleEditModal' && isModalOpen && (
-          <Modal children={<ModalAddTransaction id={id} />} />
-        )}
-        {modalType === 'modal/toggleLogOutModal' && isModalOpen && (
-          <Modal children={<Logout />} showCloseIcon={false} />
-        )} */}
       </Container>
     </>
   );

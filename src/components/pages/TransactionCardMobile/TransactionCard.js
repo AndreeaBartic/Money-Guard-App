@@ -12,6 +12,8 @@ import {
   StyledWrapperButtons,
 } from './TransactionCard.styled';
 import { CustomButton } from '../../../components/TransactionTable/TransactionTable.styled';
+import { useState } from 'react';
+import ModalAddTransactions from 'components/AddTrans/ModalAddTransactions';
 const formatDate = date => {
   const d = new Date(date);
   const day = d.getDate().toString().padStart(2, '0');
@@ -23,19 +25,32 @@ const formatDate = date => {
 export const TransactionCard = ({
   transactions,
   categories,
-  handleEditClick,
+
   deleteTransactions,
 }) => {
   const getCategoryName = categoryId => {
     const category = categories.find(cat => cat.id === categoryId);
     return category ? category.name : 'Uncategorized';
   };
-
+  const [isOpen, setIsOpen] = useState(false);
+  const [edit, setEdit] = useState(false);
+  console.log(isOpen, edit);
+  const handleEditClick = () => {
+    setIsOpen(true);
+    setEdit(true);
+  };
   return (
     <StyledListCard>
       {transactions.map(
         ({ transactionDate, type, categoryId, comment, amount, id }) => {
           const date = formatDate(transactionDate);
+          const transactionData = {
+            transactionDate: date,
+            type,
+            categoryId,
+            comment,
+            amount,
+          };
           const numberSign =
             type === 'expense' || type === 'EXPENSE' ? '-' : '+';
           const categoryName = getCategoryName(categoryId);
@@ -76,9 +91,17 @@ export const TransactionCard = ({
                     </CustomButton>
                   </li>
                   <StyledPencilEdit>
-                    <StyledPencil onClick={() => handleEditClick(id)} />
+                    <StyledPencil onClick={() => handleEditClick()} />
                     Edit
                   </StyledPencilEdit>
+                  {isOpen && (
+                    <ModalAddTransactions
+                      transactionData={transactionData}
+                      edit={edit}
+                      isOpen={isOpen}
+                      onClose={() => setIsOpen(false)}
+                    />
+                  )}
                 </StyledWrapperButtons>
               </ul>
             </StyledCard>

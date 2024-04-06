@@ -103,6 +103,7 @@ function FormAddTransaction({ onClose }) {
         values.type === 'INCOME' ? defaultIncomeCategoryId : values.categoryId,
     };
     dispatch(addTransaction(payload));
+    onClose();
     resetForm();
   };
 
