@@ -82,14 +82,14 @@ export const transactionSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(editItem.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        const updatedItem = action.payload;
         const index = state.transactions.findIndex(
-          item => item._id === updatedItem._id
+          transaction => transaction._id === action.meta.arg.id
         );
         if (index !== -1) {
-          state.transactions[index] = updatedItem;
+          state.transactions[index] = {
+            ...state.transactions[index],
+            ...action.payload,
+          };
         }
       })
       .addCase(editItem.rejected, (state, action) => {

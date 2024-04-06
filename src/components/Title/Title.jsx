@@ -1,5 +1,5 @@
 import React from 'react';
-import { TitleStyle } from './Title.styled';
+import { TitleStyle } from './Titled.styled.';
 
 const Title = ({ children }) => {
   return <TitleStyle>{children}</TitleStyle>;
