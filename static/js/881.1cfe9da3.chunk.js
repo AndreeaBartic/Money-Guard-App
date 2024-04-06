@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmoney_guard_app=self.webpackChunkmoney_guard_app||[]).push([[881],{5881:(n,e,r)=>{r.r(e),r.d(e,{default:()=>c});var t=r(579);const{CurrencyContainer:a}=r(9112),c=()=>(0,t.jsx)(a,{})},9112:(n,e,r)=>{r.r(e),r.d(e,{CurrencyContainer:()=>c});var t,a=r(7528);const c=r(4512).default.div(t||(t=(0,a.A)(["\n  max-width: 480px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  margin-top: 30px;\n"])))}}]);
+//# sourceMappingURL=881.1cfe9da3.chunk.js.map
