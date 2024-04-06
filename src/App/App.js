@@ -12,7 +12,7 @@ const RegistrationPage = lazy(() =>
 );
 const LoginPage = lazy(() => import('../components/pages/LoginPage'));
 
-const CurrencyPage = lazy(() =>
+const CurrencyMob = lazy(() =>
   import('../components/pages/CurrencyMob/CurrencyMobile')
 );
 const StatisticsPage = lazy(() => import('../components/pages/StatisticsPage'));
@@ -68,10 +68,10 @@ function App() {
               }
             />
             <Route
-              path="currency"
+              path="/currency"
               element={
-                <ProtectedRoute redirectTo="/login">
-                  <CurrencyPage />
+                <ProtectedRoute>
+                  <CurrencyMob />
                 </ProtectedRoute>
               }
             />

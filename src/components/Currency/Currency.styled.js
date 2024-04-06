@@ -13,66 +13,33 @@ import line_desc_tab_2x from '../../images/CurrencyChartImages/nline_desc_tab_2x
 import line_desc_mob_1x from '../../images/CurrencyChartImages/nline_desc_mob_1x.png';
 import line_desc_mob_2x from '../../images/CurrencyChartImages/nline_desc_mob_2x.png';
 
-export const Graph = styled.div`
-  position: relative;
-  background: rgba(74, 86, 226, 0.1);
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  img {
-    width: 100%;
-  }
-
-  @media screen and (min-width: 1280px) {
-    padding-top: 40px;
-    border-bottom-left-radius: unset;
-    border-bottom-right-radius: unset;
-  }
-`;
-
-export const Ball = styled.span`
-  display: none;
-
-  @media screen and (min-width: 1280px) {
-    display: inline;
-    position: absolute;
-    top: 55px;
-    left: 46px;
-    color: rgba(255, 134, 141, 1);
-    font-size: 12px;
-  }
-`;
-
-export const BallEur = styled.span`
-  display: none;
-
-  @media screen and (min-width: 1280px) {
-    display: inline;
-    position: absolute;
-    top: 20px;
-    right: 94px;
-    color: rgba(255, 134, 141, 1);
-    font-size: 12px;
-  }
-`;
-
 export const Wrap = styled.div`
-  background: rgba(74, 86, 226, 0.1);
-  box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
-  width: 320px;
-  margin-top: 24px;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% + 16px);
+  margin-left: -16px;
+  color: #fbfbfb;
+  box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
+  overflow: clip;
 
-  @media screen and (min-width: 768px) and (max-width: 1279px) {
+  @media only screen and (max-width: 1279px) {
+    margin-top: 70px;
     width: 336px;
-    margin-top: 0px;
   }
 
-  @media screen and (min-width: 1280px) {
-    width: 480px;
-    margin-top: 0px;
-    border-bottom-left-radius: unset;
-    border-bottom-right-radius: unset;
+  @media only screen and (max-width: 769px) {
+    width: 336px;
+    border-radius: 0px 0px 8px 8px;
+    background: rgba(74, 86, 226, 0.1);
+  }
+
+  @media only screen and (max-width: 425px) {
+    width: 320px;
+    margin-top: 0;
+    margin-left: -20px;
   }
 `;
 
