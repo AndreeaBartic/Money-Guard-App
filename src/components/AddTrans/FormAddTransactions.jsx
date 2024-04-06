@@ -48,7 +48,7 @@ const transactionSchema = object({
 });
 
 const initialValues = {
-  type: 'INCOME',
+  type: 'EXPENSE',
   categoryId: '',
   amount: 0,
   transactionDate: new Date(),
@@ -95,14 +95,14 @@ function FormAddTransaction({ onClose }) {
     };
   });
 
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = async (values, { resetForm }) => {
     const defaultIncomeCategoryId = '063f1132-ba5d-42b4-951d-44011ca46262';
     const payload = {
       ...values,
       categoryId:
         values.type === 'INCOME' ? defaultIncomeCategoryId : values.categoryId,
     };
-    dispatch(addTransaction(payload));
+    await dispatch(addTransaction(payload));
     onClose();
     resetForm();
   };

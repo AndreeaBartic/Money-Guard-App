@@ -69,7 +69,7 @@ export const TransactionCard = ({
                 <StyledTypeOfField>
                   <StyledText>Category</StyledText>
                   <StyledCategory type={type}>
-                    {type === 'income' ? 'Income' : categoryName}
+                    {type === 'INCOME' ? 'INCOME' : categoryName}
                   </StyledCategory>
                 </StyledTypeOfField>
                 <StyledTypeOfField>
