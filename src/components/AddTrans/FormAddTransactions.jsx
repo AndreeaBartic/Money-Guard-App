@@ -76,6 +76,7 @@ function FormAddTransaction({ onClose }) {
         const response = await axios.get(`/api/transaction-categories`);
         setCategories(response.data);
         localStorage.setItem('categories', JSON.stringify(response.data));
+        console.log(response.data);
         return response.data;
       } catch (error) {
         return error.message;
@@ -138,7 +139,7 @@ function FormAddTransaction({ onClose }) {
                 <>
                   <CustomSelect
                     options={optionCategories}
-                    value={values}
+                    value={values.categoryId}
                     onChange={option => {
                       setFieldValue('categoryId', option);
                     }}

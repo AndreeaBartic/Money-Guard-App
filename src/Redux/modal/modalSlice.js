@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   isModalOpen: false,
-  modalType: null,
 };
 
 const modalSlice = createSlice({
@@ -10,16 +9,13 @@ const modalSlice = createSlice({
   initialState: initialState,
   reducers: {
     toggleAddModal(state, action) {
-      state.isModalOpen = !state.isModalOpen;
-      state.modalType = action.type;
+      state.isModalOpen = true;
     },
     toggleEditModal(state, action) {
-      state.isModalOpen = !state.isModalOpen;
-      state.modalType = action.type;
+      state.isModalOpen = true;
     },
     toggleLogOutModal(state, action) {
-      state.isModalOpen = !state.isModalOpen;
-      state.modalType = action.type;
+      state.isModalOpen = false;
     },
     toggleModal(state, action) {
       state.isModalOpen = !state.isModalOpen;

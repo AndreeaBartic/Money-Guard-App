@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import {
@@ -17,20 +17,13 @@ import {
   CustomButton,
 } from './TransactionTable.styled';
 import { selectIsLoading } from '../../Redux/transactions/transactionsSelectors';
-import Modal from '../../components/Modal/Modal';
-import AddTransaction from '../../components/AddTrans/FormAddTransactions';
-import EditTransaction from '../../components/Edit/Edit';
-import Logout from '../../components/Logout/Logout';
-import { toggleEditModal } from '../../Redux/modal/modalSlice';
-import {
-  selectModalState,
-  selectModalTypeState,
-} from '../../Redux/modal/selector';
-import { BiPencil } from 'react-icons/bi';
+// import { toggleEditModal } from '../../Redux/modal/modalSlice';
+
 import { RotatingLines } from 'react-loader-spinner';
 import { TransactionCard } from '../pages/TransactionCardMobile/TransactionCard';
 import { transactionSlice } from '../../Redux/transactions/transactionsSlice';
 import { ScrollToTopButton } from '../pages/ScrollToTopButton/ScrollToTopButton';
+import EditTrans from './EditTrans';
 
 const TransactionTable = () => {
   const {
@@ -38,9 +31,7 @@ const TransactionTable = () => {
     deleteItem,
   } = require('../../Redux/transactions/transactionsOperations');
   const dispatch = useDispatch();
-  const [id, setId] = useState(null);
-  const modalType = useSelector(selectModalTypeState);
-  const isModalOpen = useSelector(selectModalState);
+
   const isMobile = useMediaQuery({ minWidth: 240, maxWidth: 767 });
   const isLoading = useSelector(selectIsLoading);
 
@@ -50,11 +41,6 @@ const TransactionTable = () => {
     });
   };
 
-  const handleEditClick = id => {
-    setId(id);
-    dispatch(toggleEditModal());
-  };
-
   useEffect(() => {
     dispatch(fetchTransactions());
   }, [dispatch, fetchTransactions]);
@@ -62,7 +48,7 @@ const TransactionTable = () => {
   const allTransactions = useSelector(
     state => state[transactionSlice.name].transactions
   );
-  // console.log(allTransactions);
+
   const sortedTransactions = allTransactions
     .slice()
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -93,18 +79,24 @@ const TransactionTable = () => {
                 top5Transactions.map(
                   ({
                     transactionDate,
-                    // createdAt,
                     type,
                     categoryId,
                     comment,
                     amount,
                     id,
                   }) => {
-                    // console.log(top5Transactions);
+                    const transactionData = {
+                      transactionDate,
+                      type,
+                      categoryId,
+                      comment,
+                      amount,
+                      id,
+                    };
                     const category =
                       categories.find(cat => cat.id === categoryId)?.name ||
                       'Categorie necunoscută';
-                    // let date = new Date(createdAt).toLocaleDateString();
+
                     let numberSign = '+';
                     let colorClassName = 'colorIncome';
                     if (type === 'EXPENSE') {
@@ -126,7 +118,7 @@ const TransactionTable = () => {
                           {amount}
                         </TableDataColor>
                         <PencilButton>
-                          <BiPencil onClick={() => handleEditClick(id)} />
+                          <EditTrans transactionData={transactionData} />
                           <CustomButton
                             style={{}}
                             className="deleteItem"
@@ -150,21 +142,21 @@ const TransactionTable = () => {
             <ScrollToTopButton />
             <TransactionCard
               transactions={top5Transactions}
-              handleEditClick={handleEditClick}
+              // handleEditClick={handleEditClick}
               deleteTransactions={deleteTransactions}
             />
           </>
         )}
 
-        {modalType === 'modal/toggleAddModal' && isModalOpen && (
+        {/* {modalType === 'modal/toggleAddModal' && isModalOpen && (
           <Modal children={<AddTransaction />} />
         )}
         {modalType === 'modal/toggleEditModal' && isModalOpen && (
-          <Modal children={<EditTransaction id={id} />} />
+          <Modal children={<ModalAddTransaction id={id} />} />
         )}
         {modalType === 'modal/toggleLogOutModal' && isModalOpen && (
           <Modal children={<Logout />} showCloseIcon={false} />
-        )}
+        )} */}
       </Container>
     </>
   );
