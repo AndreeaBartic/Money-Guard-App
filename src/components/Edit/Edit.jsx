@@ -25,6 +25,7 @@ import {
   editItem,
   fetchTransactions,
 } from '../../Redux/transactions/transactionsOperations';
+import { toast } from 'react-toastify';
 
 const transactionSchema = object({
   type: string()
@@ -97,14 +98,14 @@ export default function EditTransaction({ transactionData, onClose }) {
   });
   const handleSubmit = async (values, { setSubmitting }) => {
     const payload = {
-      id: transactionData.id,
       values,
+      id: transactionData.id,
     };
 
     try {
       await dispatch(editItem(payload));
       await dispatch(fetchTransactions());
-      alert('Transaction updated successfully!');
+      toast.success('Transaction updated successfully!');
       onClose();
     } catch (error) {
       console.error('Failed to update the transaction', error);

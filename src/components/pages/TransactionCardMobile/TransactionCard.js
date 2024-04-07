@@ -93,15 +93,15 @@ export const TransactionCard = ({
                   <StyledPencilEdit>
                     <StyledPencil onClick={() => handleEditClick()} />
                     Edit
+                    {isOpen && (
+                      <ModalAddTransactions
+                        transactionData={transactionData}
+                        edit={edit}
+                        isOpen={isOpen}
+                        onClose={() => setIsOpen(false)}
+                      />
+                    )}
                   </StyledPencilEdit>
-                  {isOpen && (
-                    <ModalAddTransactions
-                      transactionData={transactionData}
-                      edit={edit}
-                      isOpen={isOpen}
-                      onClose={() => setIsOpen(false)}
-                    />
-                  )}
                 </StyledWrapperButtons>
               </ul>
             </StyledCard>

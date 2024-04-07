@@ -17,8 +17,6 @@ import {
   CustomButton,
 } from './TransactionTable.styled';
 import { selectIsLoading } from '../../Redux/transactions/transactionsSelectors';
-// import { toggleEditModal } from '../../Redux/modal/modalSlice';
-
 import { RotatingLines } from 'react-loader-spinner';
 import { TransactionCard } from '../pages/TransactionCardMobile/TransactionCard';
 import { transactionSlice } from '../../Redux/transactions/transactionsSlice';
@@ -144,10 +142,10 @@ const TransactionTable = () => {
             </Data>
           </ContainerHeader>
         ) : (
-          // Render Cards
           <>
             <ScrollToTopButton />
             <TransactionCard
+              transactionData={allTransactions}
               transactions={top5Transactions}
               categories={categories}
               deleteTransactions={deleteTransactions}
