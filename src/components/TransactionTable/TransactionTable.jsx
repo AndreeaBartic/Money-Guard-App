@@ -79,7 +79,7 @@ const TransactionTable = () => {
                   </div>
                 </TableRow>
               ) : (
-                allTransactions.map(
+                top5Transactions.map(
                   ({
                     transactionDate,
                     type,
@@ -145,7 +145,6 @@ const TransactionTable = () => {
           <>
             <ScrollToTopButton />
             <TransactionCard
-              transactionData={allTransactions}
               transactions={top5Transactions}
               categories={categories}
               deleteTransactions={deleteTransactions}

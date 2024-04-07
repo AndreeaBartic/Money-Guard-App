@@ -34,23 +34,26 @@ export const TransactionCard = ({
   };
   const [isOpen, setIsOpen] = useState(false);
   const [edit, setEdit] = useState(false);
-  console.log(isOpen, edit);
-  const handleEditClick = () => {
+
+  const handleEditClick = transactionData => {
     setIsOpen(true);
     setEdit(true);
   };
+
   return (
     <StyledListCard>
       {transactions.map(
         ({ transactionDate, type, categoryId, comment, amount, id }) => {
           const date = formatDate(transactionDate);
           const transactionData = {
-            transactionDate: date,
+            transactionDate,
             type,
             categoryId,
             comment,
             amount,
+            id,
           };
+
           const numberSign =
             type === 'expense' || type === 'EXPENSE' ? '-' : '+';
           const categoryName = getCategoryName(categoryId);
@@ -91,7 +94,7 @@ export const TransactionCard = ({
                     </CustomButton>
                   </li>
                   <StyledPencilEdit>
-                    <StyledPencil onClick={() => handleEditClick()} />
+                    <StyledPencil onClick={handleEditClick} />
                     Edit
                     {isOpen && (
                       <ModalAddTransactions

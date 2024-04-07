@@ -85,6 +85,7 @@ export const transactionSlice = createSlice({
         const index = state.transactions.findIndex(
           transaction => transaction._id === action.meta.arg.id
         );
+
         if (index !== -1) {
           state.transactions[index] = {
             ...state.transactions[index],

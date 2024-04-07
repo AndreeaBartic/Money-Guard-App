@@ -3,7 +3,7 @@ import { ScrollButton } from './ScrollToTopButton.styled';
 import { AiOutlineArrowUp } from 'react-icons/ai';
 
 export const ScrollToTopButton = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [, setIsVisible] = useState(false);
 
   const handleScroll = () => {
     if (window.scrollY > 100) {
@@ -28,7 +28,7 @@ export const ScrollToTopButton = () => {
   }, []);
 
   return (
-    <ScrollButton isVisible={isVisible} onClick={scrollToTop}>
+    <ScrollButton onClick={scrollToTop}>
       <AiOutlineArrowUp />
     </ScrollButton>
   );

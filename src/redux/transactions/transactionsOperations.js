@@ -11,7 +11,7 @@ export const fetchTransactions = createAsyncThunk(
       const response = await axios.get('/api/transactions');
       const data = response.data;
       localStorage.setItem('transactions', JSON.stringify(data));
-      console.log(data);
+
       return data;
     } catch (e) {
       return rejectWithValue(e.message);

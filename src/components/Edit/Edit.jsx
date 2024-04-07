@@ -96,32 +96,32 @@ export default function EditTransaction({ transactionData, onClose }) {
       label: category.name,
     };
   });
-  const handleSubmit = async (values, { setSubmitting }) => {
-    const payload = {
-      values,
-      id: transactionData.id,
-    };
 
-    try {
-      await dispatch(editItem(payload));
-      await dispatch(fetchTransactions());
-      toast.success('Transaction updated successfully!');
-      onClose();
-    } catch (error) {
-      console.error('Failed to update the transaction', error);
-    }
-    setSubmitting(false);
-  };
   return (
     <>
       <AddTitle>Edit transaction</AddTitle>
       <Formik
         initialValues={initialValues}
         validationSchema={transactionSchema}
-        onSubmit={handleSubmit}
+        onSubmit={(values, { setSubmitting }) => {
+          const payload = {
+            id: transactionData.id,
+            values,
+          };
+
+          try {
+            dispatch(editItem(payload));
+            dispatch(fetchTransactions());
+            toast.success('Transaction updated successfully!');
+            onClose();
+          } catch (error) {
+            console.error('Failed to update the transaction', error);
+          }
+          setSubmitting(false);
+        }}
       >
-        {({ values, setFieldValue, validate }) => (
-          <StyledForm autoComplete="off">
+        {({ values, setFieldValue, validate, handleSubmit }) => (
+          <StyledForm onSubmit={handleSubmit} autoComplete="off">
             <SwitcherWrapper>
               <CustomSwitch
                 checked={values.type === 'EXPENSE'}
