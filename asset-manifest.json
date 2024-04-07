@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Money-Guard-App/static/css/main.0366f48b.css",
-    "main.js": "/Money-Guard-App/static/js/main.dd42bda6.js",
+    "main.js": "/Money-Guard-App/static/js/main.7912a092.js",
     "static/css/824.01fa3ac5.chunk.css": "/Money-Guard-App/static/css/824.01fa3ac5.chunk.css",
-    "static/js/824.44937714.chunk.js": "/Money-Guard-App/static/js/824.44937714.chunk.js",
+    "static/js/824.3ae502a1.chunk.js": "/Money-Guard-App/static/js/824.3ae502a1.chunk.js",
     "static/js/884.e42280a8.chunk.js": "/Money-Guard-App/static/js/884.e42280a8.chunk.js",
     "static/js/612.78d3bc97.chunk.js": "/Money-Guard-App/static/js/612.78d3bc97.chunk.js",
     "static/js/881.1cfe9da3.chunk.js": "/Money-Guard-App/static/js/881.1cfe9da3.chunk.js",
     "static/css/42.2ff57054.chunk.css": "/Money-Guard-App/static/css/42.2ff57054.chunk.css",
     "static/js/42.1b0cccc2.chunk.js": "/Money-Guard-App/static/js/42.1b0cccc2.chunk.js",
     "static/js/714.ee13012e.chunk.js": "/Money-Guard-App/static/js/714.ee13012e.chunk.js",
-    "static/js/548.3bfd3ff4.chunk.js": "/Money-Guard-App/static/js/548.3bfd3ff4.chunk.js",
+    "static/js/548.307c12d5.chunk.js": "/Money-Guard-App/static/js/548.307c12d5.chunk.js",
     "static/js/562.ce495b62.chunk.js": "/Money-Guard-App/static/js/562.ce495b62.chunk.js",
     "static/js/382.224671ca.chunk.js": "/Money-Guard-App/static/js/382.224671ca.chunk.js",
     "static/js/268.a49eb421.chunk.js": "/Money-Guard-App/static/js/268.a49eb421.chunk.js",
@@ -53,16 +53,16 @@
     "static/media/left-bottom-part.svg": "/Money-Guard-App/static/media/left-bottom-part.c9cfa8c83a2cdc87589417e8b586ffd1.svg",
     "static/media/right-bottom-part.svg": "/Money-Guard-App/static/media/right-bottom-part.ec07fda7d9ab133f7b181eae52c15c89.svg",
     "main.0366f48b.css.map": "/Money-Guard-App/static/css/main.0366f48b.css.map",
-    "main.dd42bda6.js.map": "/Money-Guard-App/static/js/main.dd42bda6.js.map",
+    "main.7912a092.js.map": "/Money-Guard-App/static/js/main.7912a092.js.map",
     "824.01fa3ac5.chunk.css.map": "/Money-Guard-App/static/css/824.01fa3ac5.chunk.css.map",
-    "824.44937714.chunk.js.map": "/Money-Guard-App/static/js/824.44937714.chunk.js.map",
+    "824.3ae502a1.chunk.js.map": "/Money-Guard-App/static/js/824.3ae502a1.chunk.js.map",
     "884.e42280a8.chunk.js.map": "/Money-Guard-App/static/js/884.e42280a8.chunk.js.map",
     "612.78d3bc97.chunk.js.map": "/Money-Guard-App/static/js/612.78d3bc97.chunk.js.map",
     "881.1cfe9da3.chunk.js.map": "/Money-Guard-App/static/js/881.1cfe9da3.chunk.js.map",
     "42.2ff57054.chunk.css.map": "/Money-Guard-App/static/css/42.2ff57054.chunk.css.map",
     "42.1b0cccc2.chunk.js.map": "/Money-Guard-App/static/js/42.1b0cccc2.chunk.js.map",
     "714.ee13012e.chunk.js.map": "/Money-Guard-App/static/js/714.ee13012e.chunk.js.map",
-    "548.3bfd3ff4.chunk.js.map": "/Money-Guard-App/static/js/548.3bfd3ff4.chunk.js.map",
+    "548.307c12d5.chunk.js.map": "/Money-Guard-App/static/js/548.307c12d5.chunk.js.map",
     "562.ce495b62.chunk.js.map": "/Money-Guard-App/static/js/562.ce495b62.chunk.js.map",
     "382.224671ca.chunk.js.map": "/Money-Guard-App/static/js/382.224671ca.chunk.js.map",
     "268.a49eb421.chunk.js.map": "/Money-Guard-App/static/js/268.a49eb421.chunk.js.map",
@@ -71,6 +71,6 @@
   },
   "entrypoints": [
     "static/css/main.0366f48b.css",
-    "static/js/main.dd42bda6.js"
+    "static/js/main.7912a092.js"
   ]
 }
