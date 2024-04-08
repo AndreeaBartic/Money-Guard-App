@@ -44,10 +44,9 @@ const LoginForm = () => {
         toast.success(`You have successfully logged in ${name}.`, {
           autoClose: 1200,
         });
+        navigate('/home');
         resetForm();
       }
-      navigate('/home');
-      resetForm();
     } catch (error) {
       toast.error('Login failed. Please check your credentials.', {
         autoClose: 3000,
