@@ -14,6 +14,7 @@ import {
 import { CustomButton } from '../../../components/TransactionTable/TransactionTable.styled';
 import { useState } from 'react';
 import ModalAddTransactions from 'components/AddTrans/ModalAddTransactions';
+
 const formatDate = date => {
   const d = new Date(date);
   const day = d.getDate().toString().padStart(2, '0');
@@ -23,10 +24,9 @@ const formatDate = date => {
 };
 
 export const TransactionCard = ({
-  transactions,
   categories,
-
   deleteTransactions,
+  transactions,
 }) => {
   const getCategoryName = categoryId => {
     const category = categories.find(cat => cat.id === categoryId);
@@ -34,8 +34,10 @@ export const TransactionCard = ({
   };
   const [isOpen, setIsOpen] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
 
   const handleEditClick = transactionData => {
+    setSelectedTransaction(transactionData);
     setIsOpen(true);
     setEdit(true);
   };
@@ -53,7 +55,6 @@ export const TransactionCard = ({
             amount,
             id,
           };
-
           const numberSign =
             type === 'expense' || type === 'EXPENSE' ? '-' : '+';
           const categoryName = getCategoryName(categoryId);
@@ -94,14 +95,19 @@ export const TransactionCard = ({
                     </CustomButton>
                   </li>
                   <StyledPencilEdit>
-                    <StyledPencil onClick={handleEditClick} />
+                    <StyledPencil
+                      onClick={() => handleEditClick(transactionData)}
+                    />
                     Edit
                     {isOpen && (
                       <ModalAddTransactions
-                        transactionData={transactionData}
+                        transactionData={selectedTransaction}
                         edit={edit}
                         isOpen={isOpen}
-                        onClose={() => setIsOpen(false)}
+                        onClose={() => {
+                          setIsOpen(false);
+                          setSelectedTransaction(null);
+                        }}
                       />
                     )}
                   </StyledPencilEdit>
