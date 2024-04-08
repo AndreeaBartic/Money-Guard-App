@@ -48,7 +48,7 @@ const transactionSchema = object({
 });
 
 const initialValues = {
-  type: 'INCOME',
+  type: 'EXPENSE',
   categoryId: '',
   amount: 0,
   transactionDate: new Date(),
@@ -76,6 +76,7 @@ function FormAddTransaction({ onClose }) {
         const response = await axios.get(`/api/transaction-categories`);
         setCategories(response.data);
         localStorage.setItem('categories', JSON.stringify(response.data));
+        console.log(response.data);
         return response.data;
       } catch (error) {
         return error.message;
@@ -94,14 +95,15 @@ function FormAddTransaction({ onClose }) {
     };
   });
 
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = async (values, { resetForm }) => {
     const defaultIncomeCategoryId = '063f1132-ba5d-42b4-951d-44011ca46262';
     const payload = {
       ...values,
       categoryId:
         values.type === 'INCOME' ? defaultIncomeCategoryId : values.categoryId,
     };
-    dispatch(addTransaction(payload));
+    await dispatch(addTransaction(payload));
+    onClose();
     resetForm();
   };
 
@@ -138,7 +140,7 @@ function FormAddTransaction({ onClose }) {
                 <>
                   <CustomSelect
                     options={optionCategories}
-                    value={values}
+                    value={values.categoryId}
                     onChange={option => {
                       setFieldValue('categoryId', option);
                     }}

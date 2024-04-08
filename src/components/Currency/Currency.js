@@ -3,8 +3,8 @@ import { Wrap, StyledTable, Graphics, Line } from './Currency.styled';
 import { selectCurrency } from '../../Redux/currencyReducer/currencySelectors';
 import { fetchCurrency } from '../../Redux/currencyReducer/currencyOperations';
 import { useDispatch, useSelector } from 'react-redux';
-import LoaderCurrency from '../Loader/LoaderCurrency';
 import { OneHour } from './OneHour';
+import Loader from 'components/Loader/Loader';
 
 export const Currency = () => {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ export const Currency = () => {
   return (
     <div>
       {!currency ? (
-        <LoaderCurrency />
+        <Loader />
       ) : (
         <Wrap>
           <StyledTable>

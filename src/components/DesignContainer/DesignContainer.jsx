@@ -1,5 +1,5 @@
 import { Header } from '../Header/Header';
-import { Loader } from '../Loader/Loader';
+import Loader from '../Loader/Loader';
 import { Sidebar } from '../Sidebar/Sidebar';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';

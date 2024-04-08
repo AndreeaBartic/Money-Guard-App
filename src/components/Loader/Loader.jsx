@@ -1,25 +1,28 @@
-import { LoaderWrapper } from './Loader.styled';
-import { ReactComponent as TopIcon } from '../../images/svg/loader/top-part.svg';
-import { ReactComponent as LeftMid } from '../../images/svg/loader/left-mid-part.svg';
-import { ReactComponent as LeftBottom } from '../../images/svg/loader/left-bottom-part.svg';
-import { ReactComponent as RightTop } from '../../images/svg/loader/right-top-part.svg';
-import { ReactComponent as RightBottom } from '../../images/svg/loader/right-bottom-part.svg';
-import { useEffect } from 'react';
+import { Background } from 'components/DesignContainer/DesignContainer.styled';
+import React from 'react';
+import { FidgetSpinner } from 'react-loader-spinner';
 
-export const Loader = () => {
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => (document.body.style.overflow = 'scroll');
-  });
+const Loader = () => {
   return (
-    <LoaderWrapper>
-      <div>
-        <TopIcon width={35} height={35} />
-        <LeftMid width={45} height={45} />
-        <RightTop width={30} height={30} />
-        <LeftBottom width={30} height={30} />
-        <RightBottom width={30} height={30} />
-      </div>
-    </LoaderWrapper>
+    <Background
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+      }}
+    >
+      <FidgetSpinner
+        visible={true}
+        height="120"
+        width="120"
+        ariaLabel="fidget-spinner-loading"
+        wrapperStyle={{}}
+        wrapperClass="fidget-spinner-wrapper"
+        backgroundColor="#fff"
+      />
+    </Background>
   );
 };
+
+export default Loader;

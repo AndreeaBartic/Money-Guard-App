@@ -1,21 +1,34 @@
-import React, { lazy, Suspense, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { ProtectedRoute } from '../components/Router/ProtectedRoute';
 import { PublicRoute } from '../components/Router/PublicRoute';
 import { DesignContainer } from '../components/DesignContainer/DesignContainer';
 import { setAuthToken } from '../Redux/authReducers/authOperations';
+import loadable from '@loadable/component';
+import Loader from 'components/Loader/Loader';
 
-const Home = lazy(() => import('../components/pages/Home'));
-const RegistrationPage = lazy(() =>
-  import('../components/pages/RegistrationPage')
+const LoginPage = loadable(() => import('../components/pages/LoginPage'), {
+  fallback: <Loader type="bars" color="#0000ff" />,
+});
+const RegistrationPage = loadable(
+  () => import('../components/pages/RegistrationPage'),
+  {
+    fallback: <Loader type="bars" color="#0000ff" />,
+  }
 );
-const LoginPage = lazy(() => import('../components/pages/LoginPage'));
+const Home = loadable(() => import('../components/pages/Home'), {
+  fallback: <Loader type="bars" color="#0000ff" />,
+});
 
-const CurrencyMob = lazy(() =>
-  import('../components/pages/CurrencyMob/CurrencyMobile')
+const CurrencyMob = loadable(
+  () => import('../components/pages/CurrencyMob/CurrencyMobile'),
+  { fallback: <Loader type="bars" color="#0000ff" /> }
 );
-const StatisticsPage = lazy(() => import('../components/pages/StatisticsPage'));
+const StatisticsPage = loadable(
+  () => import('../components/pages/StatisticsPage'),
+  { fallback: <Loader type="bars" color="#0000ff" /> }
+);
 
 function App() {
   useEffect(() => {
@@ -27,63 +40,54 @@ function App() {
 
   return (
     <BrowserRouter basename="/Money-Guard-App">
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
+      <Routes>
+        <Route
+          path="/register"
+          element={
+            <PublicRoute redirectTo="/home" component={<RegistrationPage />} />
+          }
+        />
+        <Route
+          path="/login"
+          element={<PublicRoute redirectTo="/home" component={<LoginPage />} />}
+        />
+        <Route
+          path="/"
+          element={<PublicRoute redirectTo="/home" component={<LoginPage />} />}
+        />
+        <Route element={<DesignContainer />}>
           <Route
-            path="/register"
+            path="/home"
             element={
-              <PublicRoute
-                redirectTo="/home"
-                component={<RegistrationPage />}
-              />
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
             }
           />
           <Route
-            path="/login"
+            path="/statistics"
             element={
-              <PublicRoute redirectTo="/home" component={<LoginPage />} />
+              <ProtectedRoute>
+                <StatisticsPage />
+              </ProtectedRoute>
             }
           />
           <Route
-            path="/"
+            path="/currency"
             element={
-              <PublicRoute redirectTo="/home" component={<LoginPage />} />
+              <ProtectedRoute>
+                <CurrencyMob />
+              </ProtectedRoute>
             }
           />
-          <Route element={<DesignContainer />}>
-            <Route
-              path="/home"
-              element={
-                <ProtectedRoute>
-                  <Home />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/statistics"
-              element={
-                <ProtectedRoute>
-                  <StatisticsPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/currency"
-              element={
-                <ProtectedRoute>
-                  <CurrencyMob />
-                </ProtectedRoute>
-              }
-            />
-          </Route>
+        </Route>
 
-          <Route
-            path="*"
-            element={<Navigate to="/Money-Guard-App" replace={true} />}
-          />
-          <Route path="*" element={<Navigate to="/" replace={true} />} />
-        </Routes>
-      </Suspense>
+        <Route
+          path="*"
+          element={<Navigate to="/Money-Guard-App" replace={true} />}
+        />
+        <Route path="*" element={<Navigate to="/" replace={true} />} />
+      </Routes>
     </BrowserRouter>
   );
 }

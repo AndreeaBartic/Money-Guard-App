@@ -6,6 +6,7 @@ export const SidebarStyled = styled.div`
   max-width: 320px;
   width: 100%;
   align-items: center;
+  margin-top: 25px;
 
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     height: 214px;
@@ -71,6 +72,7 @@ export const DownContainer = styled.div`
     height: 214px;
     background-color: var(--select-background-color);
     border-radius: 0 0 8px 8px;
+    margin-top: 25px;
   }
 
   @media screen and (min-width: 1280px) {
