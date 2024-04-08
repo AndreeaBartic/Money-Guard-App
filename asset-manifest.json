@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/Money-Guard-App/static/css/main.879abf32.css",
-    "main.js": "/Money-Guard-App/static/js/main.74c717f0.js",
-    "static/js/612.7681661c.chunk.js": "/Money-Guard-App/static/js/612.7681661c.chunk.js",
+    "main.css": "/Money-Guard-App/static/css/main.a9291ff4.css",
+    "main.js": "/Money-Guard-App/static/js/main.53142963.js",
+    "static/js/612.0f223f31.chunk.js": "/Money-Guard-App/static/js/612.0f223f31.chunk.js",
     "static/js/884.e42280a8.chunk.js": "/Money-Guard-App/static/js/884.e42280a8.chunk.js",
     "static/css/824.01fa3ac5.chunk.css": "/Money-Guard-App/static/css/824.01fa3ac5.chunk.css",
     "static/js/824.5c3cbd18.chunk.js": "/Money-Guard-App/static/js/824.5c3cbd18.chunk.js",
@@ -46,9 +46,9 @@
     "static/media/form-user.svg": "/Money-Guard-App/static/media/form-user.feb408468475d1734d9a889932f6ee7b.svg",
     "static/media/form-email.svg": "/Money-Guard-App/static/media/form-email.cf41fb486519448076c456872d6b2e7a.svg",
     "static/media/homepage-icon.svg": "/Money-Guard-App/static/media/homepage-icon.1d9b0ed6b8838108a667dbfb1c03d2c9.svg",
-    "main.879abf32.css.map": "/Money-Guard-App/static/css/main.879abf32.css.map",
-    "main.74c717f0.js.map": "/Money-Guard-App/static/js/main.74c717f0.js.map",
-    "612.7681661c.chunk.js.map": "/Money-Guard-App/static/js/612.7681661c.chunk.js.map",
+    "main.a9291ff4.css.map": "/Money-Guard-App/static/css/main.a9291ff4.css.map",
+    "main.53142963.js.map": "/Money-Guard-App/static/js/main.53142963.js.map",
+    "612.0f223f31.chunk.js.map": "/Money-Guard-App/static/js/612.0f223f31.chunk.js.map",
     "884.e42280a8.chunk.js.map": "/Money-Guard-App/static/js/884.e42280a8.chunk.js.map",
     "824.01fa3ac5.chunk.css.map": "/Money-Guard-App/static/css/824.01fa3ac5.chunk.css.map",
     "824.5c3cbd18.chunk.js.map": "/Money-Guard-App/static/js/824.5c3cbd18.chunk.js.map",
@@ -64,7 +64,7 @@
     "285.a6b2ee7e.chunk.js.map": "/Money-Guard-App/static/js/285.a6b2ee7e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.879abf32.css",
-    "static/js/main.74c717f0.js"
+    "static/css/main.a9291ff4.css",
+    "static/js/main.53142963.js"
   ]
 }
