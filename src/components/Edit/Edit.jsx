@@ -70,7 +70,7 @@ export default function EditTransaction({ transactionData, onClose }) {
     type: transactionData.type,
     categoryId: transactionData.categoryId,
     amount: transactionData.amount,
-    transactionDate: transactionData.transactionDate,
+    transactionDate: new Date(transactionData.transactionDate),
     comment: transactionData.comment,
   };
 
@@ -108,7 +108,7 @@ export default function EditTransaction({ transactionData, onClose }) {
             id: transactionData.id,
             values,
           };
-          console.log(payload);
+
           try {
             dispatch(editItem(payload));
             dispatch(fetchTransactions());

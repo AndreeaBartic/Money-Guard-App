@@ -10,6 +10,7 @@ import { persistStore } from 'redux-persist';
 import 'index.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from 'components/Loader/Loader';
 
 let persistor = persistStore(store);
 
@@ -18,7 +19,10 @@ root.render(
   <React.StrictMode>
     <GlobalStyles />
     <ReduxProvider store={store}>
-      <PersistGate loading={<p>Loading...</p>} persistor={persistor}>
+      <PersistGate
+        loading={<Loader type="bars" color="#0000ff" />}
+        persistor={persistor}
+      >
         <App />
         <ToastContainer position="top-right" autoClose={3000} />
       </PersistGate>

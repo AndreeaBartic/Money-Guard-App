@@ -1,9 +1,7 @@
 import { Header } from '../Header/Header';
-import { Loader } from '../Loader/Loader';
 import { Sidebar } from '../Sidebar/Sidebar';
-import { Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
 import { Background, Container, DashboardPage } from './DesignContainer.styled';
+import Home from 'components/pages/Home';
 
 export const DesignContainer = () => {
   return (
@@ -14,9 +12,7 @@ export const DesignContainer = () => {
           <Sidebar />
         </DashboardPage>
         <main>
-          <Suspense fallback={<Loader />}>
-            <Outlet />
-          </Suspense>
+          <Home />
         </main>
       </Container>
     </Background>
