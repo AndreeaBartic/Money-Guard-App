@@ -87,7 +87,8 @@ export const TransactionCard = ({
                 <StyledWrapperButtons>
                   <li>
                     <CustomButton
-                      onClick={() => {
+                      onClick={e => {
+                        e.preventDefault();
                         deleteTransactions(id);
                       }}
                     >
@@ -96,7 +97,10 @@ export const TransactionCard = ({
                   </li>
                   <StyledPencilEdit>
                     <StyledPencil
-                      onClick={() => handleEditClick(transactionData)}
+                      onClick={e => {
+                        e.preventDefault();
+                        handleEditClick(transactionData);
+                      }}
                     />
                     Edit
                     {isOpen && (

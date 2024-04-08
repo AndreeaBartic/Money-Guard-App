@@ -6,8 +6,7 @@ const EditTrans = ({ transactionData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [edit, setEdit] = useState(false);
 
-  const handleEditClick = e => {
-    e.preventDefault();
+  const handleEditClick = () => {
     setIsOpen(true);
     setEdit(true);
   };

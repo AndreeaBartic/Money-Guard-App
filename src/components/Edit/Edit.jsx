@@ -103,15 +103,15 @@ export default function EditTransaction({ transactionData, onClose }) {
       <Formik
         initialValues={initialValues}
         validationSchema={transactionSchema}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={async (values, { setSubmitting }) => {
           const payload = {
             id: transactionData.id,
             values,
           };
 
           try {
-            dispatch(editItem(payload));
-            dispatch(fetchTransactions());
+            await dispatch(editItem(payload));
+            await dispatch(fetchTransactions());
             toast.success('Transaction updated successfully!');
             onClose();
           } catch (error) {
