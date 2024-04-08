@@ -88,6 +88,14 @@
   font-size: 20px;
   font-weight: 100;
 }
+.register {
+  color: #d5d3d7;
+  font-size: 14px;
+}
+.register-link {
+  color: #ffa047;
+  text-decoration: none;
+}
 @media screen and (max-width: 767px) {
   .add-btn {
     right: 124px;

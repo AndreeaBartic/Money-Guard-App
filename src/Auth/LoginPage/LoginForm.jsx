@@ -16,8 +16,7 @@ import {
 } from './LoginForm.styled';
 import { toast } from 'react-toastify';
 import { LogotipStyled } from '../RegistrationPage/RegistrationForm.styled';
-import { useNavigate } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 const ValidationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email address').required('Required'),
   password: Yup.string().required('Required'),
@@ -97,7 +96,12 @@ const LoginForm = () => {
             </IconInInput>
             <ErrorMessage name="password" component="div" />
           </LabelStyled>
-
+          <p className="register">
+            You don't have an acount?{' '}
+            <Link className="register-link" to="/register">
+              Register
+            </Link>
+          </p>
           <CustomButton type="submit">Log In</CustomButton>
           <CustomButton isNavLink to="/register">
             Register
