@@ -27,7 +27,7 @@ export const SidebarStyled = styled.div`
 export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
 
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     margin: 100px 100px 100px 0px;

@@ -15,7 +15,8 @@ const modalSlice = createSlice({
       state.isModalOpen = true;
     },
     toggleLogOutModal(state, action) {
-      state.isModalOpen = false;
+      state.isModalOpen = !state.isModalOpen;
+      state.modalType = action.type;
     },
     toggleModal(state, action) {
       state.isModalOpen = !state.isModalOpen;

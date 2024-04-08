@@ -98,13 +98,12 @@ export const NavContainer = styled.nav`
     }
   }
   @media screen and (min-width: 1280px) {
-    padding: 40px 0 28px 16px;
+    padding: 40px 0 28px 0px;
     .menu {
       list-style: none;
       width: 100%;
       flex-direction: column;
       gap: 12px;
-      margin-left: 16px;
     }
 
     .currency {
@@ -141,7 +140,7 @@ export const NavContainer = styled.nav`
             rgba(255, 255, 255, 1) 50%,
             rgba(56, 63, 142, 0.1) 30%
           );
-        } 
+        }
       }
     }
 
