@@ -20,7 +20,7 @@ root.render(
     <GlobalStyles />
     <ReduxProvider store={store}>
       <PersistGate
-        loading={<Loader type="bars" color="#0000ff" />}
+        loading={<Loader type="spin" color="#FFF043" />}
         persistor={persistor}
       >
         <App />

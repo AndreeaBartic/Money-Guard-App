@@ -1,9 +1,10 @@
+import { Background } from 'components/DesignContainer/DesignContainer.styled';
 import React from 'react';
-import ReactLoading from 'react-loading';
+import { FidgetSpinner } from 'react-loader-spinner';
 
-const Loader = ({ type, color }) => {
+const Loader = () => {
   return (
-    <div
+    <Background
       style={{
         display: 'flex',
         justifyContent: 'center',
@@ -11,8 +12,16 @@ const Loader = ({ type, color }) => {
         height: '100vh',
       }}
     >
-      <ReactLoading type={type} color={color} height={'20%'} width={'20%'} />
-    </div>
+      <FidgetSpinner
+        visible={true}
+        height="120"
+        width="120"
+        ariaLabel="fidget-spinner-loading"
+        wrapperStyle={{}}
+        wrapperClass="fidget-spinner-wrapper"
+        backgroundColor="#fff"
+      />
+    </Background>
   );
 };
 
