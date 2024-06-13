@@ -97,7 +97,7 @@ const LoginForm = () => {
             <ErrorMessage name="password" component="div" />
           </LabelStyled>
           <p className="register">
-            You don't have an acount?{' '}
+            You don't have an account?{' '}
             <Link className="register-link" to="/register">
               Register
             </Link>
